@@ -1,2 +1,2 @@
-# weddytor
+# Weddytor
 Editor de HTML online
