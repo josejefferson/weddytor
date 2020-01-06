@@ -1,16 +1,16 @@
 self.addEventListener('install', e => {
 	e.waitUntil(
-		caches.open('htmleditor').then(cache => {
+		caches.open('weddytor').then(cache => {
 			return cache.addAll([
 				'.',
-				'app.js',
-				'customF7.css',
-				'index.css',
+				'js/app.js',
+				'css/customF7.css',
+				'css/index.css',
 				'index.html',
-				'index.js',
+				'js/index.js',
 				'manifest.json',
 				'sw.js',
-				'user.js',
+				'js/user.js',
 			])
 				.then(() => self.skipWaiting());
 		})
@@ -19,7 +19,7 @@ self.addEventListener('install', e => {
 
 self.addEventListener('fetch', event => {
 	event.respondWith(
-		caches.open('htmleditor')
+		caches.open('weddytor')
 			.then(cache => cache.match(event.request, { ignoreSearch: true }))
 			.then(response => {
 				return response || fetch(event.request);
