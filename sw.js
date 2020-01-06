@@ -3,14 +3,14 @@ self.addEventListener('install', e => {
 		caches.open('htmleditor').then(cache => {
 			return cache.addAll([
 				'.',
-				'app.js',
-				'customF7.css',
-				'index.css',
+				'js/app.js',
+				'css/customF7.css',
+				'css/index.css',
 				'index.html',
-				'index.js',
+				'js/index.js',
 				'manifest.json',
 				'sw.js',
-				'user.js',
+				'js/user.js',
 			])
 				.then(() => self.skipWaiting());
 		})
