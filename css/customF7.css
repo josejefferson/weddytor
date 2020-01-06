@@ -1,0 +1,30 @@
+.popover {
+	max-height: calc(100% - 16px);
+	overflow: auto;
+}
+
+.actions-modal {
+	max-height: calc(100% - 56px);
+}
+
+.toolbar-inner.scroll {
+	overflow-x: auto;
+}
+
+.panel .item-media,
+.popover .item-media,
+.panel .item-inner,
+.popover .item-inner {
+	padding-bottom: 0 !important;
+	padding-top: 0 !important;
+}
+
+.custom-list-divider {
+	background-color: var(--f7-list-border-color);
+	height: 1px;
+	margin: 8px 0;
+}
+
+.md .item-media .icon {
+	color: #737373;
+}

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<meta name="theme-color" content="#303f9f">
+	<!--#121212 dark background on manifest-->
+	<title>Editor de HTML</title>
+	<link rel="alternate" hreflang="pt-br" href="en.index.html">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="manifest" href="manifest.json">
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.7.95/css/materialdesignicons.min.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/framework7@5.2.0/css/framework7.bundle.min.css" />
+	<link rel="stylesheet" href="css/materialColorsF7.css">
+	<link rel="stylesheet" href="css/customF7.css">
+	<link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+	<div id="app">
+		<div class="views">
+			<div class="view view-main">
+
+				<div class="page" data-name="result">
+					<div class="navbar">
+						<div class="navbar-bg"></div>
+						<div class="navbar-inner">
+							<div class="left">
+								<a href="#" class="link back"><i class="mdi mdi-arrow-left"></i></a>
+							</div>
+							<div class="title">Resultado</div>
+						</div>
+					</div>
+
+					<div class="page-content output-page">
+						<iframe name="output" id="output"></iframe>
+					</div>
+				</div>
+
+				<div class="page" data-name="feditor">
+					<div class="navbar">
+						<div class="navbar-bg"></div>
+						<div class="navbar-inner">
+							<div class="left">
+								<a href="#" class="link back tooltip-init" data-tooltip="Cancelar"
+									data-action="runCancel"><i class="mdi mdi-close"></i></a>
+							</div>
+							<div class="title">Editor de texto formatado</div>
+							<div class="right">
+								<a href="#" class="link back tooltip-init" data-tooltip="Salvar"
+									data-action="saveFEditor"><i class="mdi mdi-content-save"></i></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="page-content">
+						<div class="text-editor" style="--f7-text-editor-height: calc(100% - 32px - 48px)">
+							<div class="text-editor-content" contenteditable></div>
+						</div>
+					</div>
+				</div>
+
+				<div class="page" data-name="open">
+					<div class="navbar">
+						<div class="navbar-bg"></div>
+						<div class="navbar-inner">
+							<div class="left">
+								<a href="#" class="link back"><i class="mdi mdi-arrow-left"></i></a>
+							</div>
+							<div class="title">Abrir arquivo</div>
+						</div>
+					</div>
+
+					<div class="page-content">
+						<div class="block-title">HTML</div>
+						<div class="block">
+							<label class="button button-fill">
+								{{ $('#openFileHTML')[0].files[0] ? $('#openFileHTML')[0].files[0].name : 'Selecionar arquivo' }}
+								<input type="file" name="openFileHTML" id="openFileHTML" hidden
+									@change="vue.$forceUpdate()">
+							</label>
+						</div>
+
+						<div class="block-title">CSS</div>
+						<div class="block">
+							<label class="button button-fill">
+								{{ $('#openFileCSS')[0].files[0] ? $('#openFileCSS')[0].files[0].name : 'Selecionar arquivo' }}
+								<input type="file" name="openFileCSS" id="openFileCSS" hidden
+									@change="vue.$forceUpdate()">
+							</label>
+						</div>
+
+						<div class="block-title">JS</div>
+						<div class="block">
+							<label class="button button-fill">
+								{{ $('#openFileJS')[0].files[0] ? $('#openFileJS')[0].files[0].name : 'Selecionar arquivo' }}
+								<input type="file" name="openFileJS" id="openFileJS" hidden
+									@change="vue.$forceUpdate()">
+							</label>
+						</div>
+
+						<div class="custom-list-divider"></div>
+
+						<div class="block">
+							<button class="button button-fill" data-action="openFile">Concluído</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="page" data-name="save">
+					<div class="navbar">
+						<div class="navbar-bg"></div>
+						<div class="navbar-inner">
+							<div class="left">
+								<a href="#" class="link back"><i class="mdi mdi-arrow-left"></i></a>
+							</div>
+							<div class="title">Salvar arquivo</div>
+						</div>
+					</div>
+
+					<div class="page-content">
+						<div class="block-title">{{ fileTitle }}</div>
+						<div class="block">
+							<a href="" download="" class="button button-fill link external" id="saveFileHTML">Salvar
+								HTML</a>
+						</div>
+						<div class="block">
+							<a href="" download="" class="button button-fill link external" id="saveFileCSS">Salvar
+								CSS</a>
+						</div>
+						<div class="block">
+							<a href="" download="" class="button button-fill link external" id="saveFileJS">Salvar
+								JS</a>
+						</div>
+						<div class="block">
+							<i>Obs.: Os arquivos CSS e JS não estão vinculados ao arquivo HTML.</i>
+						</div>
+					</div>
+				</div>
+
+				<div class="page" data-name="settings">
+					<div class="navbar">
+						<div class="navbar-bg"></div>
+						<div class="navbar-inner">
+							<div class="left">
+								<a href="#" class="link back"><i class="mdi mdi-arrow-left"></i></a>
+							</div>
+							<div class="title">Configurações</div>
+						</div>
+					</div>
+
+					<div class="page-content">
+						<div class="block-title">Personalização</div>
+						<div class="list">
+							<ul>
+								<li>
+									<label class="item-content item-checkbox">
+										<div class="item-media"><i class="mdi mdi-theme-light-dark icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Tema escuro
+											</div>
+											<div class="item-after">
+												<div class="toggle toggle-init">
+													<input type="checkbox" id="darkTheme" class="set">
+													<div class="toggle-icon"></div>
+												</div>
+											</div>
+										</div>
+									</label>
+								</li>
+
+								<li class="accordion-item">
+									<a class="item-content item-link" data-action="sset_fontSize">
+										<div class="item-media"><i class="mdi mdi-format-size icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Tamanho da fonte
+												<div class="item-footer"><span id="editorFontSizeN" data-value-target="#editorFontSize"></span>px</div>
+											</div>
+										</div>
+									</a>
+									<div class="accordion-item-content">
+										<div class="block">
+											<div class="range-slider range-slider-init color-orange margin-top margin-bottom">
+												<input type="range" min="0" max="52" step="2" id="editorFontSize" class="set">
+											</div>
+
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+
+						<div class="block-title">Salvar e restaurar</div>
+						<div class="list">
+							<ul>
+								<li>
+									<label class="item-content item-checkbox">
+										<div class="item-media"><i class="mdi mdi-content-save icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Salvamento automático
+												<div class="item-footer">Salva o código automaticamente a cada 1 minuto
+												</div>
+											</div>
+											<div class="item-after">
+												<div class="toggle toggle-init">
+													<input type="checkbox" id="">
+													<div class="toggle-icon"></div>
+												</div>
+											</div>
+										</div>
+									</label>
+								</li>
+						
+								<li>
+									<label class="item-content item-checkbox">
+										<div class="item-media"><i class="mdi mdi-content-save icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Salvar código ao sair
+												<div class="item-footer">Salva o código automaticamente ao sair do app
+												</div>
+											</div>
+											<div class="item-after">
+												<div class="toggle toggle-init">
+													<input type="checkbox" id="">
+													<div class="toggle-icon"></div>
+												</div>
+											</div>
+										</div>
+									</label>
+								</li>
+						
+								<li>
+									<label class="item-content item-checkbox">
+										<div class="item-media"><i class="mdi mdi-history icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Restaurar código automaticamente
+												<div class="item-footer">Restaura o código salvo automaticamente ao
+													abrir o app</div>
+											</div>
+											<div class="item-after">
+												<div class="toggle toggle-init">
+													<input type="checkbox" id="">
+													<div class="toggle-icon"></div>
+												</div>
+											</div>
+										</div>
+									</label>
+								</li>
+							</ul>
+						</div>
+
+						<div class="block-title">Padrões</div>
+						<div class="list">
+							<ul>
+								<li>
+									<div class="item-content item-link">
+										<div class="item-media"><i class="mdi mdi-language-html5 icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Código HTML padrão
+												<div class="item-footer">&lt;!DOCTYPE html&gt;&lt;ht...</div>
+											</div>
+										</div>
+									</div>
+								</li>
+
+								<li>
+									<div class="item-content item-link">
+										<div class="item-media"><i class="mdi mdi-language-css3 icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Código CSS padrão
+												<div class="item-footer">body { background: red; }</div>
+											</div>
+										</div>
+									</div>
+								</li>
+
+								<li>
+									<div class="item-content item-link">
+										<div class="item-media"><i class="mdi mdi-language-javascript icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Código JS padrão
+												<div class="item-footer">Não definido</div>
+											</div>
+										</div>
+									</div>
+								</li>
+
+								<li>
+									<div class="item-content item-link">
+										<div class="item-media"><i class="mdi mdi-code-tags icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Códigos rápidos
+												<div class="item-footer">
+													9 códigos rápidos
+												</div>
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+
+						<div class="block-title">Importar e exportar</div>
+						<div class="list">
+							<ul>
+								<li>
+									<div class="item-content item-link">
+										<div class="item-media"><i class="mdi mdi-application-import icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Importar configurações
+											</div>
+										</div>
+									</div>
+								</li>
+						
+								<li>
+									<div class="item-content item-link">
+										<div class="item-media"><i class="mdi mdi-application-export icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Exportar configurações
+											</div>
+										</div>
+									</div>
+								</li>
+
+								<li>
+									<div class="item-content item-link">
+										<div class="item-media"><i class="mdi mdi-history icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Restaurar configurações padrão
+											</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="page" data-name="home">
+
+					<div class="navbar">
+						<div class="navbar-bg"></div>
+						<div class="navbar-inner">
+							<div class="left">
+								<a class="link panel-open" data-panel="#mainDrawer"><i class="mdi mdi-menu"></i></a>
+							</div>
+							<div class="title">{{ fileTitle }}.html - Editor de HTML</div>
+							<div class="right">
+								<a class="link actions-open tooltip-init" data-actions="#addPackage"
+									data-tooltip="Adicionar..."><i class="mdi mdi-plus"></i></a>
+								<a class="link popover-open tooltip-init" data-popover="#mainMenu"
+									data-tooltip="Mais opções"><i class="mdi mdi-dots-vertical"></i></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="toolbar tabbar toolbar-top">
+						<div class="toolbar-inner">
+							<a href="#tab-html" class="tab-link tab-link-active">HTML</a>
+							<a href="#tab-css" class="tab-link">CSS</a>
+							<a href="#tab-js" class="tab-link">JS</a>
+						</div>
+					</div>
+
+					<div class="toolbar toolbar-bottom toolbar-hidden">
+						<div class="toolbar-inner scroll" id="quickCharacters">
+
+							<a class="link tooltip-init" id="toolbarX" data-tooltip="Sair do modo de edição"><i
+									class="mdi mdi-close-circle"></i></a>
+							<a class="link tooltip-init" id="toolbarTab" data-tooltip="Inserir tabulação"><i
+									class="mdi mdi-keyboard-tab"></i></a>
+
+							<a class="link">&lt;</a>
+							<a class="link">&lt;/</a>
+							<a class="link">&gt;</a>
+							<a class="link">=</a>
+							<a class="link">"</a>
+							<a class="link">,</a>
+							<a class="link">&amp;</a>
+							<a class="link">;</a>
+							<a class="link">/</a>
+							<a class="link">:</a>
+							<a class="link">-</a>
+							<a class="link">_</a>
+							<a class="link">#</a>
+							<a class="link">%</a>
+							<a class="link">.</a>
+							<a class="link">{</a>
+							<a class="link">}</a>
+							<a class="link">(</a>
+							<a class="link">)</a>
+							<a class="link">[</a>
+							<a class="link">]</a>
+							<a class="link">!</a>
+							<a class="link">'</a>
+							<a class="link">$</a>
+							<a class="link">+</a>
+							<a class="link">*</a>
+							<a class="link">@</a>
+							<a class="link">~</a>
+							<a class="link">\</a>
+							<a class="link">?</a>
+						</div>
+					</div>
+
+					<div class="fab fab-right-bottom no-margin-bottom color-blueGrey tooltip-init"
+						data-tooltip="Executar" data-action="run">
+						<a href="/result/">
+							<i class="mdi mdi-play icon"></i>
+						</a>
+					</div>
+
+					<div class="tabs-animated-wrap">
+						<div class="tabs">
+							<div id="tab-html" class="page-content tab tab-active no-padding-bottom">
+								<div class="editor-container">
+									<div id="editorHTML" class="editor"></div>
+								</div>
+							</div>
+
+							<div id="tab-css" class="page-content tab no-padding-bottom">
+								<div class="editor-container">
+									<div id="editorCSS" class="editor"></div>
+								</div>
+							</div>
+							<div id="tab-js" class="page-content tab no-padding-bottom">
+								<div class="editor-container">
+									<div id="editorJS" class="editor"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="panel panel-left panel-cover" id="mainDrawer">
+						<div class="list margin-vertical no-hairlines no-hairlines-between">
+							<ul>
+								<li><a href="/open/" class="list-button item-content panel-close">
+										<div class="item-media"><i class="mdi mdi-folder icon"></i></div>
+										<div class="item-inner">Abrir</div>
+									</a></li>
+								<li><a href="/save/" class="list-button item-content panel-close"
+										data-action="saveFile">
+										<div class="item-media"><i class="mdi mdi-content-save icon"></i></div>
+										<div class="item-inner">Salvar</div>
+									</a></li>
+								<li class="custom-list-divider"></li>
+								<li><a href="/settings/" class="list-button item-content panel-close">
+										<div class="item-media"><i class="mdi mdi-settings icon"></i></div>
+										<div class="item-inner">Configurações</div>
+									</a></li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="popover" id="mainMenu">
+						<div class="popover-inner">
+							<div class="list no-hairlines no-hairlines-between">
+								<ul>
+									<li><a class="list-button item-content popover-close" data-action="undo">
+											<div class="item-media">
+												<div class="mdi mdi-undo icon"></div>
+											</div>
+											<div class="item-inner">
+												<div class="item-title">Desfazer</div>
+											</div>
+										</a></li>
+									<li><a class="list-button item-content popover-close" data-action="redo">
+											<div class="item-media">
+												<div class="mdi mdi-redo icon"></div>
+											</div>
+											<div class="item-inner">
+												<div class="item-title">Refazer</div>
+											</div>
+										</a></li>
+									<li><a class="list-button item-content popover-close" data-action="selectAll">
+											<div class="item-media">
+												<div class="mdi mdi-select-all icon"></div>
+											</div>
+											<div class="item-inner">
+												<div class="item-title">Selecionar tudo</div>
+											</div>
+										</a></li>
+									<li><a class="list-button item-content popover-close" data-action="copyAll">
+											<div class="item-media">
+												<div class="mdi mdi-content-copy icon"></div>
+											</div>
+											<div class="item-inner">
+												<div class="item-title">Copiar código</div>
+											</div>
+										</a></li>
+									<li><a class="list-button item-content popover-close" data-action="deleteAll">
+											<div class="item-media">
+												<div class="mdi mdi-delete icon"></div>
+											</div>
+											<div class="item-inner">
+												<div class="item-title">Apagar código</div>
+											</div>
+										</a></li>
+									<li><a class="list-button item-content popover-close" data-action="beautify">
+											<div class="item-media">
+												<div class="mdi mdi-sort icon"></div>
+											</div>
+											<div class="item-inner">
+												<div class="item-title">Organizar código</div>
+											</div>
+										</a></li>
+									<li><a href="/feditor/" class="list-button item-content popover-close"
+											data-action="feditor">
+											<div class="item-media">
+												<div class="mdi mdi-format-font icon"></div>
+											</div>
+											<div class="item-inner">
+												<div class="item-title">Editor formatado</div>
+											</div>
+										</a></li>
+									<li><label class="list-button popover-close item-content item-checkbox"
+											data-action="hiddenChars">
+											<div class="item-media"><i class="mdi mdi-eye-off icon"></i></div>
+											<div class="item-inner">
+												<div class="item-title">
+													Caracteres ocultos
+												</div>
+											</div>
+											<div class="item-after">
+												<label class="toggle toggle-init">
+													<input type="checkbox" name="hiddenChars" id="hiddenChars">
+													<span class="toggle-icon"></span>
+												</label>
+											</div>
+										</label></li>
+									<li><a class="list-button item-content popover-close" id="installApp"
+											data-action="install">
+											<div class="item-media">
+												<div class="mdi mdi-plus-circle-outline icon"></div>
+											</div>
+											<div class="item-inner">
+												<div class="item-title">Instalar como app</div>
+											</div>
+										</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="actions-modal" id="addPackage">
+						<div class="actions-group" v-for="(gPackages, group) in packages">
+							<div class="actions-label">{{ group }}</div>
+							<div class="actions-button actions-close" v-for="(pData, pName) in gPackages"
+								:data-group="group" :data-package="pName">{{ pName }}</div>
+						</div>
+						<div class="actions-group">
+							<div class="actions-button actions-close color-red">FECHAR</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/jquery.cookie@1.4.1"></script> -->
+	<script src="https://jasonday.github.io/printThis/printThis.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/framework7@5.2.0/js/framework7.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.7/ace.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.10.2"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.10.2/js/lib/beautify-html.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.10.2/js/lib/beautify-css.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.10.2/js/lib/beautify.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/user.js"></script>
+	<script src="js/index.js"></script>
+	<script src="js/settings.js"></script>
+	<script src="js/dialogs.js"></script>
+
+
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/eruda/1.5.8/eruda.min.js"></script>
+	<script>eruda.init()</script> -->
+</body>
+
+</html>
