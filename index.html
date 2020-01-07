@@ -109,27 +109,24 @@
 						<div class="block-title">HTML</div>
 						<div class="block">
 							<label class="button button-fill">
-								{{ $('#openFileHTML')[0].files[0] ? $('#openFileHTML')[0].files[0].name : 'Selecionar arquivo' }}
-								<input type="file" name="openFileHTML" id="openFileHTML" hidden
-									@change="vue.$forceUpdate()">
+								Selecionar arquivo
+								<input type="file" name="openFileHTML" id="openFileHTML" hidden>
 							</label>
 						</div>
 
 						<div class="block-title">CSS</div>
 						<div class="block">
 							<label class="button button-fill">
-								{{ $('#openFileCSS')[0].files[0] ? $('#openFileCSS')[0].files[0].name : 'Selecionar arquivo' }}
-								<input type="file" name="openFileCSS" id="openFileCSS" hidden
-									@change="vue.$forceUpdate()">
+								Selecionar arquivo
+								<input type="file" name="openFileCSS" id="openFileCSS" hidden>
 							</label>
 						</div>
 
 						<div class="block-title">JS</div>
 						<div class="block">
 							<label class="button button-fill">
-								{{ $('#openFileJS')[0].files[0] ? $('#openFileJS')[0].files[0].name : 'Selecionar arquivo' }}
-								<input type="file" name="openFileJS" id="openFileJS" hidden
-									@change="vue.$forceUpdate()">
+								Selecionar arquivo
+								<input type="file" name="openFileJS" id="openFileJS" hidden>
 							</label>
 						</div>
 
@@ -153,7 +150,7 @@
 					</div>
 
 					<div class="page-content">
-						<div class="block-title">{{ fileTitle }}</div>
+						<div class="block-title"><span class="fileTitle"></span></div>
 						<div class="block">
 							<a href="" download="" class="button button-fill link external" id="saveFileHTML">Salvar
 								HTML</a>
@@ -514,7 +511,7 @@
 							<div class="left">
 								<a class="link panel-open" data-panel="#mainDrawer"><i class="mdi mdi-menu"></i></a>
 							</div>
-							<div class="title">{{ fileTitle }}.html - Weddytor</div>
+							<div class="title"><span class="fileTitle"></span>.html - Weddytor</div>
 							<div class="right">
 								<a class="link actions-open tooltip-init" data-actions="#addPackage"
 									data-tooltip="Adicionar..." data-action="addPackageMount"><i class="mdi mdi-plus"></i></a>
@@ -740,7 +737,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery.cookie@1.4.1"></script>
 	<script src="https://jasonday.github.io/printThis/printThis.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/framework7@5.2.0/js/framework7.bundle.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.7/ace.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.10.2"></script>
 	<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.10.2/js/lib/beautify-html.min.js"></script>

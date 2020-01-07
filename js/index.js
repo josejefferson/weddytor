@@ -14,28 +14,12 @@ function conv(str) {
 	}
 }
 
-// function vue() {
-// 	$('[data-value-target]').each(function () {
-// 		let $this = $(this);
-// 		let target = $(this).data('value-target');
-// 		$(target).on('click mousemove change paste', function () {
-// 			$this.text($(this).val())
-// 		});
-// 	});
-// }
-
-
 window.location.replace('#!/');
 
 
 // Variáveis
 var currentTab = 'tab-html';
 var fileTitle = 'Sem título';
-
-
-// Vue
-var vue = new Vue({ el: '#app' });
-
 
 // Framework7
 var app = new Framework7({
@@ -295,7 +279,6 @@ function openFile() {
 					}).open();
 
 					$('#openFileHTML, #openFileCSS, #openFileJS').val('');
-					vue.$forceUpdate();
 					updateTitle();
 				}
 			},
@@ -304,7 +287,6 @@ function openFile() {
 	}).open();
 }
 function saveFile() {
-	vue.$forceUpdate();
 	$('#saveFileHTML').attr('download', fileTitle + '.html');
 	$('#saveFileCSS').attr('download', fileTitle + '.css');
 	$('#saveFileJS').attr('download', fileTitle + '.js');
@@ -356,7 +338,7 @@ function updateTitle() {
 	fileTitle = regexTitle.test(editorHTML.getValue()) ?
 		(editorHTML.getValue().match(regexTitle)[1] ? editorHTML.getValue().match(regexTitle)[1] : 'Sem título')
 		: 'Sem título';
-	// vue.$forceUpdate();
+	$('.fileTitle').text(fileTitle);
 }
 
 
