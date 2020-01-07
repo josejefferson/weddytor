@@ -98,6 +98,26 @@ function quickCodesMount() {
 	});
 }
 
+function addPackageMount() {
+	let html = '';
+	for (let group in packages) {
+		let itemHTML = '';
+		for (let item in packages[group]) {
+			let itemContent = packages[group][item];
+			itemHTML += `<div class="actions-button actions-close" data-group="${group}" data-package="${item}">${item}</div>`;
+		}
+		html += `<div class="actions-group">`;
+		html += `	<div class="actions-label">${group}</div>`;
+		html += `	${itemHTML}`;
+		html += `</div>`;
+	}
+	html += `<div class="actions-group">`;
+	html += `	<div class="actions-button actions-close color-red">FECHAR</div>`;
+	html += `</div>`;
+
+	$('#addPackage').html(html);
+}
+
 var newItemHTML = '<li class="accordion-item quickCodesItem">' +
 	'	<a class="item-content item-link item-input">' +
 	'		<div class="item-inner">' +
@@ -210,6 +230,8 @@ function importSettings() {
 		settingsF = new FileReader();
 		settingsF.readAsText(settingsFile);
 		settingsF.onload = () => {
+			$(window).off('beforeunload');
+			clearInterval(autoSave);
 			for (let cookie in $.cookie()) {
 				$.removeCookie(cookie);
 			}
@@ -256,6 +278,8 @@ function restoreDefaultSettings() {
 							{
 								text: 'Sim',
 								onClick: function () {
+									$(window).off('beforeunload');
+									clearInterval(autoSave);
 									for (var cookie in $.cookie()) {
 										$.removeCookie(cookie);
 									}

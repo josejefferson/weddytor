@@ -517,7 +517,7 @@
 							<div class="title">{{ fileTitle }}.html - Weddytor</div>
 							<div class="right">
 								<a class="link actions-open tooltip-init" data-actions="#addPackage"
-									data-tooltip="Adicionar..."><i class="mdi mdi-plus"></i></a>
+									data-tooltip="Adicionar..." data-action="addPackageMount"><i class="mdi mdi-plus"></i></a>
 								<a class="link popover-open tooltip-init" data-popover="#mainMenu"
 									data-tooltip="Mais opções"><i class="mdi mdi-dots-vertical"></i></a>
 							</div>
@@ -726,14 +726,7 @@
 					</div>
 
 					<div class="actions-modal" id="addPackage">
-						<div class="actions-group" v-for="(gPackages, group) in packages">
-							<div class="actions-label">{{ group }}</div>
-							<div class="actions-button actions-close" v-for="(pData, pName) in gPackages"
-								:data-group="group" :data-package="pName">{{ pName }}</div>
-						</div>
-						<div class="actions-group">
-							<div class="actions-button actions-close color-red">FECHAR</div>
-						</div>
+						
 					</div>
 				</div>
 

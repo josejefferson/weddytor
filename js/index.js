@@ -180,7 +180,7 @@ $('.tab').on('tab:show', function () {
 
 
 // Add Package
-$('#addPackage .actions-button[data-package]').click(function () {
+$('#addPackage').on('click', '.actions-button[data-package]', function () {
 	let group = $(this).data('group');
 	let package = $(this).data('package');
 	editorHTML.insert(packages[group][package]);
@@ -206,6 +206,7 @@ $('[data-action]').click(function (e) {
 	switch (action) {
 		case 'beautify': beautifyCode(); break;
 		case 'copyAll': editorCurrent.selectAll(); editorCurrent.focus(); document.execCommand('copy'); break;
+		case 'addPackageMount': addPackageMount(); break;
 		case 'deleteAll': deleteAll(); break;
 		case 'deleteSavedCodes': deleteSavedCodes(); break;
 		case 'exportSettings': exportSettings(); break;
