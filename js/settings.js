@@ -221,29 +221,37 @@ function importSettings() {
 	app.dialog.create({
 		title: 'Importar configurações',
 		text: 'Importe os dados deste app a partir de um arquivo. AS CONFIGURAÇÕES ATUAIS SERÃO PERDIDAS!',
-		content: `<label class="button button-fill link external margin-top" id="saveFileHTML">Selecionar arquivo<input type="file" id="settingsFile" hidden></label>`,
+		content: `<label class="button button-fill link external margin-top" id="saveFileHTML"><span class="fileName">Selecionar arquivo</span><input type="file" id="settingsFile" hidden></label>`,
 		buttons: [{ text: 'Cancelar' }],
 		cssClass: 'importSettingsDialog'
 	}).open();
 	$('#settingsFile').change(function () {
+		let fileName = $(this)[0].files[0] ? $(this)[0].files[0].name : 'Selecionar arquivo';
+		$(this).siblings('.fileName').text(fileName);
 		let settingsFile = $('#settingsFile')[0].files[0];
 		settingsF = new FileReader();
 		settingsF.readAsText(settingsFile);
 		settingsF.onload = () => {
-			$(window).off('beforeunload');
-			clearInterval(autoSave);
-			for (let cookie in $.cookie()) {
-				$.removeCookie(cookie);
+			try {
+				$(window).off('beforeunload');
+				clearInterval(autoSave);
+				for (let cookie in $.cookie()) { $.removeCookie(cookie); }
+				let settings = JSON.parse(settingsF.result);
+				for (let sett in settings) { $.cookie(sett, settings[sett]); }
+				app.dialog.close('.importSettingsDialog');
+				$('.view-main').html('');
+				app.toast.create({ text: 'Configurações importadas com sucesso. Aguarde o recarregamento da página' }).open();
+				window.location.reload();
+			} catch (err) {
+				app.toast.create({
+					text: 'O arquivo que você escolheu é inválido',
+					closeTimeout: 7000,
+					closeButton: true
+				}).open();
+				app.dialog.close('.importSettingsDialog');
 			}
-			let settings = JSON.parse(settingsF.result);
-			for (let sett in settings) {
-				$.cookie(sett, settings[sett]);
-			}
-			app.dialog.close('.importSettingsDialog');
-			$('.view-main').html('');
-			app.toast.create({ text: 'Configurações importadas com sucesso. Aguarde o recarregamento da página' }).open();
-			window.location.reload();
 		}
+
 	});
 }
 
@@ -264,9 +272,7 @@ function restoreDefaultSettings() {
 		buttons: [
 			{
 				text: 'Exportar',
-				onClick: function () {
-					exportSettings();
-				}
+				onClick: function () { exportSettings(); }
 			},
 			{
 				text: 'Sim',
@@ -280,9 +286,7 @@ function restoreDefaultSettings() {
 								onClick: function () {
 									$(window).off('beforeunload');
 									clearInterval(autoSave);
-									for (var cookie in $.cookie()) {
-										$.removeCookie(cookie);
-									}
+									for (var cookie in $.cookie()) { $.removeCookie(cookie); }
 									$('.view-main').html('');
 									app.toast.create({ text: 'Configurações padrão restauradas com sucesso. Aguarde o recarregamento da página' }).open();
 									window.location.reload();

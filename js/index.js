@@ -412,3 +412,7 @@ function saveFEditor() {
 }
 
 
+$('.customFileSelect').on('change', 'input[type=file]', function () {
+	let fileName = $(this)[0].files[0] ? $(this)[0].files[0].name : 'Selecionar arquivo';
+	$(this).siblings('.fileName').text(fileName);
+});
