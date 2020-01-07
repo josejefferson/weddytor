@@ -40,6 +40,37 @@
 					</div>
 				</div>
 
+				<div class="page" data-name="colorPick">
+					<div class="navbar">
+						<div class="navbar-bg"></div>
+						<div class="navbar-inner">
+							<div class="left">
+								<a href="#" class="link back tooltip-init" data-tooltip="Cancelar"
+									data-action="runCancel"><i class="mdi mdi-close"></i></a>
+							</div>
+							<div class="title">Selecionador de cores</div>
+							<div class="right">
+								<!-- <a href="#" class="link back tooltip-init" data-tooltip="Salvar"
+									data-action="saveFEditor"><i class="mdi mdi-content-save"></i></a> -->
+							</div>
+						</div>
+					</div>
+
+					<div class="page-content">
+						<div class="block">
+							<div id="colorPicker"></div>
+						</div>
+						<div class="block-title">Inserir cor no documento</div>
+						<div class="block">
+							<div class="row">
+								<div class="col button button-fill" data-action="insertColorHEX">HEX</div>
+								<div class="col button button-fill" data-action="insertColorRGB">RGB</div>
+								<div class="col button button-fill" data-action="insertColorRGBA">RGBA</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<div class="page" data-name="feditor">
 					<div class="navbar">
 						<div class="navbar-bg"></div>
@@ -189,14 +220,15 @@
 												</label>
 											</div>
 										</label></li>
-										<li><a class="list-button popover-close item-content item-checkbox" data-action="quickCodesRestore">
-												<div class="item-media"><i class="mdi mdi-history icon"></i></div>
-												<div class="item-inner">
-													<div class="item-title">
-														Restaurar padrões
-													</div>
+									<li><a class="list-button popover-close item-content item-checkbox"
+											data-action="quickCodesRestore">
+											<div class="item-media"><i class="mdi mdi-history icon"></i></div>
+											<div class="item-inner">
+												<div class="item-title">
+													Restaurar padrões
 												</div>
-											</a></li>
+											</div>
+										</a></li>
 								</ul>
 							</div>
 						</div>
@@ -653,6 +685,15 @@
 											</div>
 											<div class="item-inner">
 												<div class="item-title">Editor formatado</div>
+											</div>
+										</a></li>
+									<li><a href="/colorPick/" class="list-button item-content popover-close"
+											data-action="colorPick">
+											<div class="item-media">
+												<div class="mdi mdi-palette icon"></div>
+											</div>
+											<div class="item-inner">
+												<div class="item-title">Selecionador de cores</div>
 											</div>
 										</a></li>
 									<li><label class="list-button popover-close item-content item-checkbox"

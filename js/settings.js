@@ -272,14 +272,17 @@ function restoreDefaultSettings() {
 			{ text: 'Não' }
 		]
 	}).open();
-	
-}
 
+}
 
 
 var autoSave;
 
 $(document).ready(function () {
+	$.cookie('defaultHTMLCode') != undefined ? editorHTMLValue = $.cookie('defaultHTMLCode') : false;
+	$.cookie('defaultCSSCode') != undefined ? editorCSSValue = $.cookie('defaultCSSCode') : false;
+	$.cookie('defaultJSCode') != undefined ? editorJSValue = $.cookie('defaultJSCode') : false;
+
 	$.cookie('darkTheme') == 'true' && ($('body').addClass('theme-dark'), $('#darkTheme').prop('checked', true));
 
 	$.cookie('darkThemeEditor') == 'false' && (
@@ -378,56 +381,17 @@ $('#autoRestoreToggle').on('toggle:change', function () {
 $('#defaultHTMLCode').on('change', function () {
 	let value = $(this).val();
 	$.cookie('defaultHTMLCode', value);
+	editorHTMLValue = value;
 });
 
 $('#defaultCSSCode').on('change', function () {
 	let value = $(this).val();
 	$.cookie('defaultCSSCode', value);
+	editorCSSValue = value;
 });
 
 $('#defaultJSCode').on('change', function () {
 	let value = $(this).val();
 	$.cookie('defaultJSCode', value);
+	editorJSValue = value;
 });
-
-
-
-
-// var data = {};
-// function start() {
-// 	data = {};
-// 	$('.grupo').each(function () {
-// 		let nome = $(this).children('.item-content').children('.item-inner').children('.item-input-wrap').children('.groupname').val();
-// 		data[nome] = {};
-// 		$(this).children('.block').children('.list').children('ul').children('.item').each(function () {
-// 			let itemNome = $(this).children('.item-content').children('.item-inner').children('.item-input-wrap').children('.itemname').val();
-// 			let itemData = $(this).children('.accordion-item-content').children('.item-input').children('.item-input-wrap').children('textarea').val();
-// 			data[nome][itemNome] = itemData;
-// 		});
-// 	});
-// }
-
-
-// var data = {
-// 	grupo1: {
-// 		item1: 'conteudo1',
-// 		item2: 'conteudo2'
-// 	},
-// 	grupo2: {
-// 		item3: 'conteudo3',
-// 		item4: 'conteudo4'
-// 	}
-// }
-// var html = '';
-// for (let group in data) {
-// 	let itemHTML = '';
-// 	for (let item in data[group]) {
-// 		itemHTML += `\t\t<div>${item}: ${data[group][item]}</div>\n`;
-// 	}
-// 	html += `<div>\n`;
-// 	html += `\t<b>${group}</b>\n`;
-// 	html += `\t<div>\n${itemHTML}\t</div>\n`;
-// 	html += `</div>\n`
-// }
-
-// $('textarea').val(html);
