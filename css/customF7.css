@@ -29,6 +29,10 @@
 	padding-top: 0 !important;
 }
 
+.list ul:not(.custom-list-divider) {
+	background: none !important;
+}
+
 .custom-list-divider {
 	background-color: var(--f7-list-border-color);
 	height: 1px;

@@ -141,6 +141,68 @@
 					</div>
 				</div>
 
+				<div class="page" data-name="quickCodes">
+					<div class="navbar">
+						<div class="navbar-bg"></div>
+						<div class="navbar-inner">
+							<div class="left">
+								<a href="#" class="link back tooltip-init" data-tooltip="Cancelar"><i
+										class="mdi mdi-close"></i></a>
+							</div>
+							<div class="title">Códigos rápidos</div>
+							<div class="right">
+								<a class="link back tooltip-init" data-tooltip="Salvar" data-action="quickCodesSave"><i
+										class="mdi mdi-content-save"></i></a>
+								<a class="link popover-open tooltip-init" data-popover="#quickCodesMenu"
+									data-tooltip="Mais opções"><i class="mdi mdi-dots-vertical"></i></a>
+							</div>
+						</div>
+					</div>
+
+					<div class="page-content">
+						<div class="block">
+							<div class="button button-fill margin-top color-green" onclick="quickCodesAddGroup(event)">
+								Adicionar grupo</div>
+						</div>
+
+						<div class="list accordion-list sortable sortable-opposite quickCodesList">
+							<ul id="quickCodes"></ul>
+						</div>
+					</div>
+
+					<div class="popover" id="quickCodesMenu">
+						<div class="popover-inner">
+							<div class="list no-hairlines no-hairlines-between">
+								<ul>
+									<li><label class="list-button popover-close item-content item-checkbox tooltip-init"
+											data-tooltip="Ativar abas de organização (experimental)">
+											<div class="item-media"><i class="mdi mdi-sort icon"></i></div>
+											<div class="item-inner">
+												<div class="item-title">
+													Ativar abas de organização (experimental)
+												</div>
+											</div>
+											<div class="item-after">
+												<label class="toggle toggle-init" id="sortablePackagesToggle">
+													<input type="checkbox" id="sortablePackages">
+													<span class="toggle-icon"></span>
+												</label>
+											</div>
+										</label></li>
+										<li><a class="list-button popover-close item-content item-checkbox" data-action="quickCodesRestore">
+												<div class="item-media"><i class="mdi mdi-history icon"></i></div>
+												<div class="item-inner">
+													<div class="item-title">
+														Restaurar padrões
+													</div>
+												</div>
+											</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
 				<div class="page" data-name="settings">
 					<div class="navbar">
 						<div class="navbar-bg"></div>
@@ -164,8 +226,25 @@
 												Tema escuro
 											</div>
 											<div class="item-after">
-												<div class="toggle toggle-init">
-													<input type="checkbox" id="darkTheme" class="set">
+												<div class="toggle toggle-init" id="darkThemeToggle">
+													<input type="checkbox" id="darkTheme">
+													<div class="toggle-icon"></div>
+												</div>
+											</div>
+										</div>
+									</label>
+								</li>
+
+								<li>
+									<label class="item-content item-checkbox">
+										<div class="item-media"><i class="mdi mdi-theme-light-dark icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Tema escuro no editor de código
+											</div>
+											<div class="item-after">
+												<div class="toggle toggle-init" id="darkThemeEditorToggle">
+													<input type="checkbox" id="darkThemeEditor" checked>
 													<div class="toggle-icon"></div>
 												</div>
 											</div>
@@ -174,21 +253,25 @@
 								</li>
 
 								<li class="accordion-item">
-									<a class="item-content item-link" data-action="sset_fontSize">
+									<a class="item-content item-link">
 										<div class="item-media"><i class="mdi mdi-format-size icon"></i></div>
 										<div class="item-inner">
 											<div class="item-title">
 												Tamanho da fonte
-												<div class="item-footer"><span id="editorFontSizeN" data-value-target="#editorFontSize"></span>px</div>
+												<div class="item-footer"><span id="editorFontSizeIndicator">14</span>px
+												</div>
 											</div>
 										</div>
 									</a>
 									<div class="accordion-item-content">
-										<div class="block">
-											<div class="range-slider range-slider-init color-orange margin-top margin-bottom">
-												<input type="range" min="0" max="52" step="2" id="editorFontSize" class="set">
+										<div class="item-content item-input">
+											<div class="item-inner">
+												<div class="range-slider range-slider-init color-orange margin-to margin-botto"
+													id="editorFontSizeRange">
+													<input type="range" min="8" max="52" step="2" value="14"
+														id="editorFontSize">
+												</div>
 											</div>
-
 										</div>
 									</div>
 								</li>
@@ -208,15 +291,15 @@
 												</div>
 											</div>
 											<div class="item-after">
-												<div class="toggle toggle-init">
-													<input type="checkbox" id="">
+												<div class="toggle toggle-init" id="autoSaveToggle">
+													<input type="checkbox" id="autoSave" checked>
 													<div class="toggle-icon"></div>
 												</div>
 											</div>
 										</div>
 									</label>
 								</li>
-						
+
 								<li>
 									<label class="item-content item-checkbox">
 										<div class="item-media"><i class="mdi mdi-content-save icon"></i></div>
@@ -227,15 +310,15 @@
 												</div>
 											</div>
 											<div class="item-after">
-												<div class="toggle toggle-init">
-													<input type="checkbox" id="">
+												<div class="toggle toggle-init" id="exitSaveToggle">
+													<input type="checkbox" id="exitSave" checked>
 													<div class="toggle-icon"></div>
 												</div>
 											</div>
 										</div>
 									</label>
 								</li>
-						
+
 								<li>
 									<label class="item-content item-checkbox">
 										<div class="item-media"><i class="mdi mdi-history icon"></i></div>
@@ -246,13 +329,24 @@
 													abrir o app</div>
 											</div>
 											<div class="item-after">
-												<div class="toggle toggle-init">
-													<input type="checkbox" id="">
+												<div class="toggle toggle-init" id="autoRestoreToggle">
+													<input type="checkbox" id="autoRestore" checked>
 													<div class="toggle-icon"></div>
 												</div>
 											</div>
 										</div>
 									</label>
+								</li>
+
+								<li>
+									<div class="item-content item-link" data-action="deleteSavedCodes">
+										<div class="item-media"><i class="mdi mdi-delete icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Apagar códigos salvos
+											</div>
+										</div>
+									</div>
 								</li>
 							</ul>
 						</div>
@@ -260,54 +354,82 @@
 						<div class="block-title">Padrões</div>
 						<div class="list">
 							<ul>
-								<li>
-									<div class="item-content item-link">
+								<li class="accordion-item">
+									<a class="item-content item-link">
 										<div class="item-media"><i class="mdi mdi-language-html5 icon"></i></div>
 										<div class="item-inner">
 											<div class="item-title">
 												Código HTML padrão
-												<div class="item-footer">&lt;!DOCTYPE html&gt;&lt;ht...</div>
+											</div>
+										</div>
+									</a>
+									<div class="accordion-item-content">
+										<div class="item-content item-input">
+											<div class="item-inner">
+												<div class="item-input-wrap">
+													<textarea placeholder="Não definido"
+														id="defaultHTMLCode"></textarea>
+												</div>
+												<div class="button button-fill margin-top"
+													data-action="restoreHTMLDefaultCode">Restaurar padrão</div>
 											</div>
 										</div>
 									</div>
 								</li>
 
-								<li>
-									<div class="item-content item-link">
+								<li class="accordion-item">
+									<a class="item-content item-link">
 										<div class="item-media"><i class="mdi mdi-language-css3 icon"></i></div>
 										<div class="item-inner">
 											<div class="item-title">
 												Código CSS padrão
-												<div class="item-footer">body { background: red; }</div>
+											</div>
+										</div>
+									</a>
+									<div class="accordion-item-content">
+										<div class="item-content item-input">
+											<div class="item-inner">
+												<div class="item-input-wrap">
+													<textarea placeholder="Não definido" id="defaultCSSCode"></textarea>
+												</div>
+												<div class="button button-fill margin-top"
+													data-action="restoreCSSDefaultCode">Restaurar padrão</div>
 											</div>
 										</div>
 									</div>
 								</li>
 
-								<li>
-									<div class="item-content item-link">
+								<li class="accordion-item">
+									<a class="item-content item-link">
 										<div class="item-media"><i class="mdi mdi-language-javascript icon"></i></div>
 										<div class="item-inner">
 											<div class="item-title">
 												Código JS padrão
-												<div class="item-footer">Não definido</div>
+											</div>
+										</div>
+									</a>
+									<div class="accordion-item-content">
+										<div class="item-content item-input">
+											<div class="item-inner">
+												<div class="item-input-wrap">
+													<textarea placeholder="Não definido" id="defaultJSCode"></textarea>
+												</div>
+												<div class="button button-fill margin-top"
+													data-action="restoreJSDefaultCode">Restaurar padrão</div>
 											</div>
 										</div>
 									</div>
 								</li>
 
 								<li>
-									<div class="item-content item-link">
+									<a href="/quickCodes/" class="item-content item-link" data-action="quickCodesMount">
 										<div class="item-media"><i class="mdi mdi-code-tags icon"></i></div>
 										<div class="item-inner">
 											<div class="item-title">
 												Códigos rápidos
-												<div class="item-footer">
-													9 códigos rápidos
-												</div>
 											</div>
 										</div>
-									</div>
+									</a>
 								</li>
 							</ul>
 						</div>
@@ -316,7 +438,7 @@
 						<div class="list">
 							<ul>
 								<li>
-									<div class="item-content item-link">
+									<div class="item-content item-link" data-action="importSettings">
 										<div class="item-media"><i class="mdi mdi-application-import icon"></i></div>
 										<div class="item-inner">
 											<div class="item-title">
@@ -325,9 +447,9 @@
 										</div>
 									</div>
 								</li>
-						
+
 								<li>
-									<div class="item-content item-link">
+									<div class="item-content item-link" data-action="exportSettings">
 										<div class="item-media"><i class="mdi mdi-application-export icon"></i></div>
 										<div class="item-inner">
 											<div class="item-title">
@@ -338,7 +460,7 @@
 								</li>
 
 								<li>
-									<div class="item-content item-link">
+									<div class="item-content item-link" data-action="restoreDefaultSettings">
 										<div class="item-media"><i class="mdi mdi-history icon"></i></div>
 										<div class="item-inner">
 											<div class="item-title">
@@ -448,23 +570,27 @@
 					</div>
 
 					<div class="panel panel-left panel-cover" id="mainDrawer">
-						<div class="list margin-vertical no-hairlines no-hairlines-between">
-							<ul>
-								<li><a href="/open/" class="list-button item-content panel-close">
-										<div class="item-media"><i class="mdi mdi-folder icon"></i></div>
-										<div class="item-inner">Abrir</div>
-									</a></li>
-								<li><a href="/save/" class="list-button item-content panel-close"
-										data-action="saveFile">
-										<div class="item-media"><i class="mdi mdi-content-save icon"></i></div>
-										<div class="item-inner">Salvar</div>
-									</a></li>
-								<li class="custom-list-divider"></li>
-								<li><a href="/settings/" class="list-button item-content panel-close">
-										<div class="item-media"><i class="mdi mdi-settings icon"></i></div>
-										<div class="item-inner">Configurações</div>
-									</a></li>
-							</ul>
+						<div class="page">
+							<div class="page-content">
+								<div class="list margin-vertical no-hairlines no-hairlines-between">
+									<ul>
+										<li><a href="/open/" class="list-button item-content panel-close">
+												<div class="item-media"><i class="mdi mdi-folder icon"></i></div>
+												<div class="item-inner">Abrir</div>
+											</a></li>
+										<li><a href="/save/" class="list-button item-content panel-close"
+												data-action="saveFile">
+												<div class="item-media"><i class="mdi mdi-content-save icon"></i></div>
+												<div class="item-inner">Salvar</div>
+											</a></li>
+										<li class="custom-list-divider"></li>
+										<li><a href="/settings/" class="list-button item-content panel-close">
+												<div class="item-media"><i class="mdi mdi-settings icon"></i></div>
+												<div class="item-inner">Configurações</div>
+											</a></li>
+									</ul>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -538,8 +664,8 @@
 												</div>
 											</div>
 											<div class="item-after">
-												<label class="toggle toggle-init">
-													<input type="checkbox" name="hiddenChars" id="hiddenChars">
+												<label class="toggle toggle-init" id="hiddenCharsToggle">
+													<input type="checkbox" id="hiddenChars">
 													<span class="toggle-icon"></span>
 												</label>
 											</div>
@@ -586,7 +712,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.10.2/js/lib/beautify-html.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.10.2/js/lib/beautify-css.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.10.2/js/lib/beautify.min.js"></script>
-	<script src="js/app.js"></script>
+	<!-- <script src="js/app.js"></script> -->
 	<script src="js/user.js"></script>
 	<script src="js/index.js"></script>
 	<script src="js/settings.js"></script>

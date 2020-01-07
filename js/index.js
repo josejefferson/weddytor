@@ -49,6 +49,7 @@ var app = new Framework7({
 		{ name: 'open', path: '/open/', pageName: 'open' },
 		{ name: 'save', path: '/save/', pageName: 'save' },
 		{ name: 'settings', path: '/settings/', pageName: 'settings' },
+		{ name: 'quickCodes', path: '/quickCodes/', pageName: 'quickCodes' },
 	]
 });
 
@@ -82,11 +83,11 @@ editorCSS.renderer.setScrollMargin(5, 5);
 editorJS.renderer.setScrollMargin(5, 5);
 
 // Default values
-editorHTML.setValue(editorHTMLValue || '');
+editorHTML.setValue($.cookie('defaultHTMLCode') != undefined ? $.cookie('defaultHTMLCode') : editorHTMLValue);
 editorHTML.clearSelection();
-editorCSS.setValue(editorCSSValue || '');
+editorCSS.setValue($.cookie('defaultCSSCode') != undefined ? $.cookie('defaultCSSCode') : editorCSSValue);
 editorCSS.clearSelection();
-editorJS.setValue(editorJSValue || '');
+editorJS.setValue($.cookie('defaultJSCode') != undefined ? $.cookie('defaultJSCode') : editorJSValue);
 editorJS.clearSelection();
 
 // window.onbeforeunload = function () {
@@ -154,23 +155,32 @@ $('#quickCharacters .link#toolbarTab').on('click contextmenu', function () {
 
 
 // Actions
-$('[data-action]').click(function () {
+$('[data-action]').click(function (e) {
 	let action = $(this).data('action');
 	switch (action) {
 		case 'beautify': beautifyCode(); break;
 		case 'copyAll': editorCurrent.selectAll(); editorCurrent.focus(); document.execCommand('copy'); break;
 		case 'deleteAll': deleteAll(); break;
+		case 'deleteSavedCodes': deleteSavedCodes(); break;
+		case 'exportSettings': exportSettings(); break;
 		case 'feditor': initFEditor(); break;
 		case 'hiddenChars': editorCurrent.setShowInvisibles($('#hiddenChars').prop('checked')); break;
+		case 'importSettings': importSettings(); break;
 		case 'install': installApp(); break;
 		case 'openFile': openFile(); break;
+		case 'quickCodesMount': quickCodesMount(); break;
+		case 'quickCodesRestore': quickCodesRestore(); break;
+		case 'quickCodesSave': quickCodesSave(); break;
 		case 'redo': editorCurrent.redo(); break;
+		case 'restoreDefaultSettings': restoreDefaultSettings(); break;
+		case 'restoreHTMLDefaultCode': $('#defaultHTMLCode').val(editorHTMLValue); $.removeCookie('defaultHTMLCode'); break;
+		case 'restoreCSSDefaultCode': $('#defaultCSSCode').val(editorCSSValue); $.removeCookie('defaultCSSCode'); break;
+		case 'restoreJSDefaultCode': $('#defaultJSCode').val(editorJSValue); $.removeCookie('defaultJSCode'); break;
 		case 'run': previewHTML(); break;
 		case 'saveFEditor': saveFEditor(); break;
 		case 'saveFile': saveFile(); break;
 		case 'selectAll': editorCurrent.selectAll(); editorCurrent.focus(); break;
 		case 'undo': editorCurrent.undo(); break;
-		// case 'set_fontSize': dial_fontSize.open(); break;
 	}
 	updateTitle();
 });
@@ -370,6 +380,3 @@ function saveFEditor() {
 }
 
 
-$('.toggle').on('toggle:change', function () {
-	editorCurrent.setShowInvisibles($('#hiddenChars').prop('checked'));
-});
