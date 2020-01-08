@@ -25,9 +25,18 @@
 .popover .item-media,
 .panel .item-inner,
 .popover .item-inner {
+	margin-left: 0 !important;
 	padding-bottom: 0 !important;
 	padding-top: 0 !important;
 }
+
+.panel {
+	width: 280px !important;
+}
+
+.toast-button {
+	color: var(--f7-color-amber) !important;
+} /*Mover para o index.css*/
 
 .list ul:not(.custom-list-divider) {
 	background: none !important;

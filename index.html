@@ -5,6 +5,21 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
 	<meta name="theme-color" content="#303f9f">
+	<meta name="description" content="Editor de HTML online">
+	<meta name="image" content="icons/background.png">
+	<meta itemprop="name" content="Weddytor">
+	<meta itemprop="description" content="Editor de HTML online">
+	<meta itemprop="image" content="icons/background.png">
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:title" content="Weddytor">
+	<meta name="twitter:description" content="Editor de HTML online">
+	<meta name="twitter:image:src" content="icons/background.png">
+	<meta name="og:title" content="Weddytor">
+	<meta name="og:description" content="Editor de HTML online">
+	<meta name="og:image" content="icons/background.png">
+	<meta name="og:url" content="https://josejefferson.github.io/weddytor/">
+	<meta name="og:site_name" content="GitHub">
+	<meta name="og:type" content="website">
 	<title>Weddytor</title>
 	<link rel="alternate" hreflang="pt-br" href="en.index.html">
 	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -23,6 +38,25 @@
 	<div id="app">
 		<div class="views">
 			<div class="view view-main">
+
+				<div class="page" data-name="feedback">
+					<div class="navbar">
+						<div class="navbar-bg"></div>
+						<div class="navbar-inner">
+							<div class="left">
+								<a href="#" class="link back"><i class="mdi mdi-arrow-left"></i></a>
+							</div>
+							<div class="title">Feedback</div>
+						</div>
+					</div>
+
+					<div class="page-content">
+						<iframe
+							src="https://docs.google.com/forms/d/e/1FAIpQLScAUJafppfs1sJhgRuVrtX0MKQRMl4NDX4smA-ReBXs9nUnUA/viewform?embedded=true"
+							width="100%" height="100%" frameborder="0" marginheight="0"
+							marginwidth="0">Carregando…</iframe>
+					</div>
+				</div>
 
 				<div class="page" data-name="result">
 					<div class="navbar">
@@ -48,11 +82,7 @@
 								<a href="#" class="link back tooltip-init" data-tooltip="Cancelar"
 									data-action="runCancel"><i class="mdi mdi-close"></i></a>
 							</div>
-							<div class="title">Selecionador de cores</div>
-							<div class="right">
-								<!-- <a href="#" class="link back tooltip-init" data-tooltip="Salvar"
-									data-action="saveFEditor"><i class="mdi mdi-content-save"></i></a> -->
-							</div>
+							<div class="title">Seletor de cores</div>
 						</div>
 					</div>
 
@@ -63,9 +93,9 @@
 						<div class="block-title">Inserir cor no documento</div>
 						<div class="block">
 							<div class="row">
-								<div class="col button button-fill" data-action="insertColorHEX">HEX</div>
-								<div class="col button button-fill" data-action="insertColorRGB">RGB</div>
-								<div class="col button button-fill" data-action="insertColorRGBA">RGBA</div>
+								<div class="col button button-fill" data-action="insertColorHEX" data-return>HEX</div>
+								<div class="col button button-fill" data-action="insertColorRGB" data-return>RGB</div>
+								<div class="col button button-fill" data-action="insertColorRGBA" data-return>RGBA</div>
 							</div>
 						</div>
 					</div>
@@ -79,7 +109,7 @@
 								<a href="#" class="link back tooltip-init" data-tooltip="Cancelar"
 									data-action="runCancel"><i class="mdi mdi-close"></i></a>
 							</div>
-							<div class="title">Editor de texto formatado</div>
+							<div class="title">Editor de formatação</div>
 							<div class="right">
 								<a href="#" class="link back tooltip-init" data-tooltip="Salvar"
 									data-action="saveFEditor"><i class="mdi mdi-content-save"></i></a>
@@ -297,7 +327,7 @@
 											<div class="item-inner">
 												<div class="range-slider range-slider-init color-orange margin-to margin-botto"
 													id="editorFontSizeRange">
-													<input type="range" min="8" max="52" step="2" value="14"
+													<input type="range" min="8" max="24" step="2" value="14"
 														id="editorFontSize">
 												</div>
 											</div>
@@ -383,6 +413,22 @@
 						<div class="block-title">Padrões</div>
 						<div class="list">
 							<ul>
+								<li>
+									<label class="item-content item-checkbox">
+										<div class="item-media"><i class="mdi mdi-console icon"></i></div>
+										<div class="item-inner">
+											<div class="item-title">
+												Ativar console
+											</div>
+											<div class="item-after">
+												<div class="toggle toggle-init" id="consoleToggle">
+													<input type="checkbox" id="console" checked>
+													<div class="toggle-icon"></div>
+												</div>
+											</div>
+										</div>
+									</label>
+								</li>
 								<li class="accordion-item">
 									<a class="item-content item-link">
 										<div class="item-media"><i class="mdi mdi-language-html5 icon"></i></div>
@@ -514,7 +560,8 @@
 							<div class="title"><span class="fileTitle"></span>.html - Weddytor</div>
 							<div class="right">
 								<a class="link actions-open tooltip-init" data-actions="#addPackage"
-									data-tooltip="Adicionar..." data-action="addPackageMount"><i class="mdi mdi-plus"></i></a>
+									data-tooltip="Adicionar..." data-action="addPackageMount"><i
+										class="mdi mdi-plus"></i></a>
 								<a class="link popover-open tooltip-init" data-popover="#mainMenu"
 									data-tooltip="Mais opções"><i class="mdi mdi-dots-vertical"></i></a>
 							</div>
@@ -600,23 +647,77 @@
 
 					<div class="panel panel-left panel-cover" id="mainDrawer">
 						<div class="page">
+							<div class="navbar">
+								<div class="navbar-bg"></div>
+								<div class="navbar-inner">
+									<div class="title">Weddytor</div>
+								</div>
+							</div>
 							<div class="page-content">
 								<div class="list margin-vertical no-hairlines no-hairlines-between">
 									<ul>
 										<li><a href="/open/" class="list-button item-content panel-close">
 												<div class="item-media"><i class="mdi mdi-folder icon"></i></div>
-												<div class="item-inner">Abrir</div>
+												<div class="item-inner">
+													<div class="item-title">Abrir</div>
+												</div>
 											</a></li>
 										<li><a href="/save/" class="list-button item-content panel-close"
 												data-action="saveFile">
 												<div class="item-media"><i class="mdi mdi-content-save icon"></i></div>
-												<div class="item-inner">Salvar</div>
+												<div class="item-inner">
+													<div class="item-title">Salvar</div>
+												</div>
+											</a></li>
+										<li><a href="/feditor/" class="list-button item-content panel-close"
+												data-action="feditor">
+												<div class="item-media">
+													<div class="mdi mdi-format-font icon"></div>
+												</div>
+												<div class="item-inner">
+													<div class="item-title">Editor de formatação</div>
+												</div>
+											</a></li>
+										<li><a href="/colorPick/" class="list-button item-content panel-close"
+												data-action="colorPick">
+												<div class="item-media">
+													<div class="mdi mdi-palette icon"></div>
+												</div>
+												<div class="item-inner">
+													<div class="item-title">Seletor de cores</div>
+												</div>
+											</a></li>
+										<li><a class="list-button item-content popup-close" id="installApp"
+												data-action="install">
+												<div class="item-media">
+													<div class="mdi mdi-plus-circle-outline icon"></div>
+												</div>
+												<div class="item-inner">
+													<div class="item-title">Instalar como app</div>
+												</div>
 											</a></li>
 										<li class="custom-list-divider"></li>
 										<li><a href="/settings/" class="list-button item-content panel-close">
 												<div class="item-media"><i class="mdi mdi-settings icon"></i></div>
-												<div class="item-inner">Configurações</div>
+												<div class="item-inner">
+													<div class="item-title">Configurações</div>
+												</div>
 											</a></li>
+										<li><a href="/feedback/"
+												class="list-button item-content link-external panel-close"
+												data-action="feedback">
+												<div class="item-media"><i class="mdi mdi-message-alert icon"></i></div>
+												<div class="item-inner">
+													<div class="item-title">Feedback</div>
+												</div>
+											</a></li>
+										<li><a class="list-button item-content panel-close" data-action="share">
+												<div class="item-media"><i class="mdi mdi-share-variant icon"></i></div>
+												<div class="item-inner">
+													<div class="item-title">Compartilhe o Weddytor</div>
+												</div>
+											</a></li>
+										<li>Falta um Sobre</li>
 									</ul>
 								</div>
 							</div>
@@ -675,24 +776,6 @@
 												<div class="item-title">Organizar código</div>
 											</div>
 										</a></li>
-									<li><a href="/feditor/" class="list-button item-content popover-close"
-											data-action="feditor">
-											<div class="item-media">
-												<div class="mdi mdi-format-font icon"></div>
-											</div>
-											<div class="item-inner">
-												<div class="item-title">Editor formatado</div>
-											</div>
-										</a></li>
-									<li><a href="/colorPick/" class="list-button item-content popover-close"
-											data-action="colorPick">
-											<div class="item-media">
-												<div class="mdi mdi-palette icon"></div>
-											</div>
-											<div class="item-inner">
-												<div class="item-title">Selecionador de cores</div>
-											</div>
-										</a></li>
 									<li><label class="list-button popover-close item-content item-checkbox"
 											data-action="hiddenChars">
 											<div class="item-media"><i class="mdi mdi-eye-off icon"></i></div>
@@ -708,50 +791,34 @@
 												</label>
 											</div>
 										</label></li>
-									<li><a class="list-button item-content popover-close" id="installApp"
-											data-action="install">
-											<div class="item-media">
-												<div class="mdi mdi-plus-circle-outline icon"></div>
-											</div>
-											<div class="item-inner">
-												<div class="item-title">Instalar como app</div>
-											</div>
-										</a></li>
 								</ul>
 							</div>
 						</div>
 					</div>
 
-					<div class="actions-modal" id="addPackage">
-						
-					</div>
+					<div class="actions-modal" id="addPackage"></div>
 				</div>
-
 			</div>
-
 		</div>
-	</div>
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1"></script>
 	<script src="https://cdn.jsdelivr.net/npm/jquery.cookie@1.4.1"></script>
-	<script src="https://jasonday.github.io/printThis/printThis.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/framework7@5.2.0/js/framework7.bundle.min.js"></script>
-	<!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.7/ace.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.10.2"></script>
 	<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.10.2/js/lib/beautify-html.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.10.2/js/lib/beautify-css.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/js-beautify@1.10.2/js/lib/beautify.min.js"></script>
-	<!-- <script src="js/app.js"></script> -->
+	<script src="js/app.js"></script>
+	<script src="js/actions.js"></script>
+	<script src="js/functions.js"></script>
+	<script src="js/settingsFunctions.js"></script>
 	<script src="js/user.js"></script>
-	<script src="js/index.js"></script>
+	<script src="js/variables.js"></script>
+	<script src="js/ace.js"></script>
+	<script src="js/framework7.js"></script>
 	<script src="js/settings.js"></script>
-	<script src="js/dialogs.js"></script>
-
-
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/eruda/1.5.8/eruda.min.js"></script>
-	<script>eruda.init()</script> -->
 </body>
 
 </html>
