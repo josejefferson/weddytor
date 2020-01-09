@@ -72,13 +72,13 @@ var feditor = app.textEditor.create({
 	placeholder: 'Insira o texto...',
 	customButtons: {
 		hr: {
-			content: '<i class="mdi mdi-minus"></i>',
+			content: '<i class="if-md mdi mdi-minus"></i><i class="if-not-md f7-icons">minus</i>',
 			onClick() {
 				document.execCommand('insertHorizontalRule');
 			}
 		},
 		removeFormat: {
-			content: '<i class="mdi mdi-format-clear"></i>',
+			content: '<i class="if-md mdi mdi-format-clear"></i><i class="if-not-md f7-icons">pencil_slash</i>',
 			onClick() {
 				document.execCommand('removeFormat');
 			}

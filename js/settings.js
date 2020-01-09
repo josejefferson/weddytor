@@ -11,6 +11,20 @@ $(document).ready(function () {
 		editorJS.setOption('theme', 'ace/theme/chrome'),
 		$('#darkThemeEditor').prop('checked', false));
 
+	$.cookie('textBreakEditor') == 'true' && (
+		editorHTML.setOption('wrap', true),
+		editorCSS.setOption('wrap', true),
+		editorJS.setOption('wrap', true),
+		$('#textBreakEditor').prop('checked', true)
+	);
+	
+	$.cookie('animationScrollEditor') == 'true' && (
+		editorHTML.setOption('animatedScroll', true),
+		editorCSS.setOption('animatedScroll', true),
+		editorJS.setOption('animatedScroll', true),
+		$('#animationScrollEditor').prop('checked', true)
+	);
+
 	$.cookie('fontSize') && (
 		editorHTML.setOption('fontSize', Number($.cookie('fontSize'))),
 		editorCSS.setOption('fontSize', Number($.cookie('fontSize'))),
@@ -23,11 +37,6 @@ $(document).ready(function () {
 		clearInterval(autoSave),
 		app.toggle.get('#autoSaveToggle').checked = false
 	) : autoSave = setInterval(saveCode, 6e4);
-
-	$.cookie('exitSave') == 'false' ? (
-		$(window).off('beforeunload'),
-		app.toggle.get('#exitSaveToggle').checked = false
-	) : $(window).on('beforeunload', saveCode);
 
 	$.cookie('autoRestore') == 'false' ? app.toggle.get('#autoRestoreToggle').checked = false : false;
 
@@ -85,16 +94,52 @@ $('#editorFontSizeRange').on('range:change', function (e) {
 	$.cookie('fontSize', value);
 });
 
+$('#textBreakEditorToggle').on('toggle:change', function () {
+	let value = app.toggle.get('#textBreakEditorToggle').checked;
+	value ? (
+		editorHTML.setOption('wrap', true),
+		editorCSS.setOption('wrap', true),
+		editorJS.setOption('wrap', true)
+	) : (
+			editorHTML.setOption('wrap', false),
+			editorCSS.setOption('wrap', false),
+			editorJS.setOption('wrap', false)
+		);
+	$.cookie('textBreakEditor', value);
+});
+
+$('#animationScrollEditorToggle').on('toggle:change', function () {
+	let value = app.toggle.get('#animationScrollEditorToggle').checked;
+	value ? (
+		editorHTML.setOption('animatedScroll', true),
+		editorCSS.setOption('animatedScroll', true),
+		editorJS.setOption('animatedScroll', true)
+	) : (
+			editorHTML.setOption('animatedScroll', false),
+			editorCSS.setOption('animatedScroll', false),
+			editorJS.setOption('animatedScroll', false)
+		);
+	$.cookie('animationScrollEditor', value);
+});
+
+$('#darkThemeEditorToggle').on('toggle:change', function () {
+	let value = app.toggle.get('#darkThemeEditorToggle').checked;
+	value ? (
+		editorHTML.setOption('theme', 'ace/theme/monokai'),
+		editorCSS.setOption('theme', 'ace/theme/monokai'),
+		editorJS.setOption('theme', 'ace/theme/monokai')
+	) : (
+			editorHTML.setOption('theme', 'ace/theme/chrome'),
+			editorCSS.setOption('theme', 'ace/theme/chrome'),
+			editorJS.setOption('theme', 'ace/theme/chrome')
+		);
+	$.cookie('darkThemeEditor', value);
+});
+
 $('#autoSaveToggle').on('toggle:change', function () {
 	let value = app.toggle.get('#autoSaveToggle').checked;
 	value ? autoSave = setInterval(saveCode, 6e4) : clearInterval(autoSave);
 	$.cookie('autoSave', value);
-});
-
-$('#exitSaveToggle').on('toggle:change', function () {
-	let value = app.toggle.get('#exitSaveToggle').checked;
-	value ? $(window).on('beforeunload', saveCode) : $(window).off('beforeunload');
-	$.cookie('exitSave', value);
 });
 
 $('#autoRestoreToggle').on('toggle:change', function () {

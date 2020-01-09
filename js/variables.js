@@ -1,3 +1,5 @@
+var appVersion = '1.0.0-alpha';
+
 var autoSave; // Guarda o timer do auto salvamento
 var currentTab = 'tab-html'; // Guia atual
 var fileTitle = 'Sem título'; // Título do arquivo
@@ -7,7 +9,6 @@ var editorCSSValue = defaultEditorCSSValue; // Define o código padrão CSS
 var editorJSValue = defaultEditorJSValue; // Define o código padrão JS
 var mobileConsole = true; // Define se utilizará um console no resultado
 var editorOptions = { // Opções do Ace Editor
-	animatedScroll: true,
 	autoScrollEditorIntoView: true,
 	fontSize: 14,
 	printMargin: false,

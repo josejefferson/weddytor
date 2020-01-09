@@ -1,9 +1,14 @@
 window.location.replace('#!/');
 
+$(document).not('input, textarea').add('.editor').on('contextmenu', function () {
+	return false;
+});
+
 // Ações
 $('[data-action]').click(function () {
 	let action = $(this).data('action');
 	switch (action) {
+		case 'about': about(); break;
 		case 'beautify': beautifyCode(); break;
 		case 'copyAll': editorCurrent.selectAll(); editorCurrent.focus(); document.execCommand('copy'); break;
 		case 'addPackageMount': addPackageMount(); break;
@@ -11,7 +16,6 @@ $('[data-action]').click(function () {
 		case 'deleteSavedCodes': deleteSavedCodes(); break;
 		case 'exportSettings': exportSettings(); break;
 		case 'feditor': initFEditor(); break;
-		case 'feedback': ; break;
 		case 'insertColorHEX': editorCurrent.insert(getColorPicker().hex); break;
 		case 'insertColorRGB': editorCurrent.insert(getColorPicker().rgb); break;
 		case 'insertColorRGBA': editorCurrent.insert(getColorPicker().rgba); break;

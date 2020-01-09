@@ -50,7 +50,6 @@ $('#quickCharacters .link#toolbarTab').on('click contextmenu', function () {
 	editorCurrent.focus();
 });
 
-//TODO: adicionar uma classe diferente para as toolbars
 function editorFocus() {
 	app.navbar.hide('.navbar');
 	app.toolbar.hide('.toolbar.toolbar-top');
@@ -71,6 +70,6 @@ function editorBlur() {
 $('#addPackage').on('click', '.actions-button[data-package]', function () {
 	let group = $(this).data('group');
 	let package = $(this).data('package');
-	editorHTML.insert(packages[group][package]);
+	editorCurrent.insert(packages[group][package]);
 	updateTitle();
 });
