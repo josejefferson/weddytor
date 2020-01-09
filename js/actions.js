@@ -1,5 +1,23 @@
 window.location.replace('#!/');
 
+// Definir versão
+if (self.fetch) {
+	fetch('VERSION.txt').then(function (response) {
+		return response.text();
+	}).then(function (data) {
+		appVersion = data;
+	});
+} else {
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', 'VERSION.txt');
+	xhr.onload = function () {
+		if (xhr.status === 200) {
+			appVersion = xhr.responseText;
+		}
+	};
+	xhr.send();
+}
+
 $(document).not('input, textarea').add('.editor').on('contextmenu', function () {
 	return false;
 });
