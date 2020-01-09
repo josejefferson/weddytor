@@ -1,4 +1,4 @@
-var appVersion = '1.0.0-alpha';
+var appVersion = '1.0.0-beta';
 
 var autoSave; // Guarda o timer do auto salvamento
 var currentTab = 'tab-html'; // Guia atual
