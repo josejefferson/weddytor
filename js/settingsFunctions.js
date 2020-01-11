@@ -88,11 +88,11 @@ function quickCodesRemoveItem(e) {
 function quickCodesSave() {
 	packages = {};
 	$('.quickCodesGroup').each(function () {
-		let groupName = $(this)/*.children('.item-content').children('.item-inner').children('.item-input-wrap')*/.find('.groupName').val();
+		let groupName = $(this).find('.groupName').val();
 		packages[groupName] = {};
-		$(this)/*.children('.quickCodesItemList').children('.list').children('ul').children*/.find('.quickCodesItem').each(function () {
-			let itemName = $(this)/*.children('.item-content').children('.item-inner').children('.item-input-wrap').children*/.find('.itemName').val();
-			let itemContent = $(this)/*.children('.accordion-item-content').children('.item-input').children('.item-input-wrap').children*/.find('.itemContent').val();
+		$(this).find('.quickCodesItem').each(function () {
+			let itemName = $(this).find('.itemName').val();
+			let itemContent = $(this).find('.itemContent').val();
 			packages[groupName][itemName] = itemContent;
 		});
 	});

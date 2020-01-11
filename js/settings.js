@@ -18,12 +18,12 @@ $(document).ready(function () {
 		$('#textBreakEditor').prop('checked', true)
 	);
 	
-	$.cookie('animationScrollEditor') == 'true' && (
-		editorHTML.setOption('animatedScroll', true),
-		editorCSS.setOption('animatedScroll', true),
-		editorJS.setOption('animatedScroll', true),
-		$('#animationScrollEditor').prop('checked', true)
-	);
+	// $.cookie('animationScrollEditor') == 'true' && (
+	// 	editorHTML.setOption('animatedScroll', true),
+	// 	editorCSS.setOption('animatedScroll', true),
+	// 	editorJS.setOption('animatedScroll', true),
+	// 	$('#animationScrollEditor').prop('checked', true)
+	// );
 
 	$.cookie('fontSize') && (
 		editorHTML.setOption('fontSize', Number($.cookie('fontSize'))),
@@ -108,19 +108,19 @@ $('#textBreakEditorToggle').on('toggle:change', function () {
 	$.cookie('textBreakEditor', value);
 });
 
-$('#animationScrollEditorToggle').on('toggle:change', function () {
-	let value = app.toggle.get('#animationScrollEditorToggle').checked;
-	value ? (
-		editorHTML.setOption('animatedScroll', true),
-		editorCSS.setOption('animatedScroll', true),
-		editorJS.setOption('animatedScroll', true)
-	) : (
-			editorHTML.setOption('animatedScroll', false),
-			editorCSS.setOption('animatedScroll', false),
-			editorJS.setOption('animatedScroll', false)
-		);
-	$.cookie('animationScrollEditor', value);
-});
+// $('#animationScrollEditorToggle').on('toggle:change', function () {
+// 	let value = app.toggle.get('#animationScrollEditorToggle').checked;
+// 	value ? (
+// 		editorHTML.setOption('animatedScroll', true),
+// 		editorCSS.setOption('animatedScroll', true),
+// 		editorJS.setOption('animatedScroll', true)
+// 	) : (
+// 			editorHTML.setOption('animatedScroll', false),
+// 			editorCSS.setOption('animatedScroll', false),
+// 			editorJS.setOption('animatedScroll', false)
+// 		);
+// 	$.cookie('animationScrollEditor', value);
+// });
 
 $('#darkThemeEditorToggle').on('toggle:change', function () {
 	let value = app.toggle.get('#darkThemeEditorToggle').checked;
