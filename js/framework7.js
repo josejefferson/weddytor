@@ -12,6 +12,8 @@ var app = new Framework7({
 		{ name: 'save', path: '/save/', pageName: 'save' },
 		{ name: 'settings', path: '/settings/', pageName: 'settings' },
 		{ name: 'quickCodes', path: '/quickCodes/', pageName: 'quickCodes' },
+		{ name: 'pSearch', path: '/pSearch/', pageName: 'pSearch' },
+		{ name: 'pSearchDetails', path: '/pSearchDetails/', pageName: 'pSearchDetails' },
 		{ name: 'feedback', path: '/feedback/', pageName: 'feedback' },
 	]
 });
@@ -103,3 +105,9 @@ function initFEditor() {
 function saveFEditor() {
 	editorHTML.insert(feditor.getValue());
 }
+
+var searchbar = app.searchbar.create({
+	el: '.searchbar#searchPackageFiles',
+	searchContainer: '.list#packageFiles',
+	searchIn: '.list#packageFiles .item-title'
+});

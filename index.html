@@ -44,7 +44,7 @@
 						<div class="navbar-bg"></div>
 						<div class="navbar-inner">
 							<div class="left">
-								<a href="#" class="link back"><i class="mdi mdi-arrow-left"></i></a>
+								<a href="#" class="link return"><i class="mdi mdi-arrow-left"></i></a>
 							</div>
 							<div class="title">Feedback</div>
 						</div>
@@ -53,8 +53,90 @@
 					<div class="page-content">
 						<iframe
 							src="https://docs.google.com/forms/d/e/1FAIpQLScAUJafppfs1sJhgRuVrtX0MKQRMl4NDX4smA-ReBXs9nUnUA/viewform?embedded=true"
-							width="100%" height="100%" frameborder="0" marginheight="0"
-							marginwidth="0"></iframe>
+							width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0"></iframe>
+					</div>
+				</div>
+
+				<div class="page" data-name="pSearch">
+					<div class="navbar">
+						<div class="navbar-bg"></div>
+						<div class="navbar-inner">
+							<div class="left">
+								<a href="#" class="link return"><i class="mdi mdi-arrow-left"></i></a>
+							</div>
+							<div class="title">Procurar pacotes</div>
+							<div class="subnavbar">
+								<div class="searchbar" id="searchh">
+									<div class="searchbar-inner">
+										<div class="searchbar-input-wrap">
+											<input type="search" id="search" autocomplete="off" autocapitalize="off"
+												placeholder="Pesquisar...">
+											<i class="searchbar-icon"></i>
+											<span class="input-clear-button"></span>
+										</div>
+										<span class="searchbar-disable-button if-not-aurora">x</span>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+
+					<div class="page-content">
+						<div class="block margin-top no-margin-bottom" id="searchInfo">
+							Digite o termo de busca na caixa acima e pressione Pesquisar no seu teclado ou
+							Enter.<br>Dica: você pode utilizar o caractere * como curinga.<br>Obs.: alguns pacotes podem
+							não funcionar pois a API utilizada foi descontinuada.<br>
+							<b class="margin-top">Distribuído por <a href="https://www.jsdelivr.com/"
+									class="link external">jsDelivr</a></b>
+						</div>
+
+						<div class="list margin-top" id="foundResults">
+							<ul></ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="page" data-name="pSearchDetails">
+					<div class="navbar">
+						<div class="navbar-bg"></div>
+						<div class="navbar-inner">
+							<div class="left">
+								<a href="#" class="link return"><i class="mdi mdi-arrow-left"></i></a>
+							</div>
+							<div class="title">Detalhes</div>
+						</div>
+					</div>
+
+					<div class="page-content">
+						<div class="block-title block-title-medium" id="packageName"></div>
+						<div class="block">
+							<div class="button button-fill" id="addToQuickCodes">Adicionar aos códigos rápidos</div>
+						</div>
+						<div class="block-title">Descrição</div>
+						<div class="block" id="packageDescription"></div>
+						<div class="block-title">Arquivo principal</div>
+						<div class="list" id="packageDefaultFile">
+							<ul></ul>
+						</div>
+						<div class="block-title">Arquivos</div>
+
+						<form class="searchbar" id="searchPackageFiles">
+							<div class="searchbar-inner">
+								<div class="searchbar-input-wrap">
+									<input type="search" placeholder="Pesquisar...">
+									<i class="searchbar-icon"></i>
+									<span class="input-clear-button"></span>
+								</div>
+							</div>
+						</form>
+						<div class="list searchbar-found" id="packageFiles">
+							<ul></ul>
+						</div>
+						<div class="block searchbar-not-found">
+							Não encontrado
+						</div>
 					</div>
 				</div>
 
@@ -63,7 +145,7 @@
 						<div class="navbar-bg"></div>
 						<div class="navbar-inner">
 							<div class="left">
-								<a href="#" class="link back"><i class="mdi mdi-arrow-left"></i></a>
+								<a href="#" class="link return"><i class="mdi mdi-arrow-left"></i></a>
 							</div>
 							<div class="title">Resultado</div>
 						</div>
@@ -79,7 +161,7 @@
 						<div class="navbar-bg"></div>
 						<div class="navbar-inner">
 							<div class="left">
-								<a href="#" class="link back tooltip-init" data-tooltip="Cancelar"
+								<a href="#" class="link return tooltip-init" data-tooltip="Cancelar"
 									data-action="runCancel"><i class="mdi mdi-close"></i></a>
 							</div>
 							<div class="title">Seletor de cores</div>
@@ -106,12 +188,12 @@
 						<div class="navbar-bg"></div>
 						<div class="navbar-inner">
 							<div class="left">
-								<a href="#" class="link back tooltip-init" data-tooltip="Cancelar"
+								<a href="#" class="link return tooltip-init" data-tooltip="Cancelar"
 									data-action="runCancel"><i class="mdi mdi-close"></i></a>
 							</div>
 							<div class="title">Editor de formatação</div>
 							<div class="right">
-								<a href="#" class="link back tooltip-init" data-tooltip="Salvar"
+								<a href="#" class="link return tooltip-init" data-tooltip="Salvar"
 									data-action="saveFEditor"><i class="mdi mdi-content-save"></i></a>
 							</div>
 						</div>
@@ -129,7 +211,7 @@
 						<div class="navbar-bg"></div>
 						<div class="navbar-inner">
 							<div class="left">
-								<a href="#" class="link back"><i class="mdi mdi-arrow-left"></i></a>
+								<a href="#" class="link return"><i class="mdi mdi-arrow-left"></i></a>
 							</div>
 							<div class="title">Abrir arquivo</div>
 						</div>
@@ -173,7 +255,7 @@
 						<div class="navbar-bg"></div>
 						<div class="navbar-inner">
 							<div class="left">
-								<a href="#" class="link back"><i class="mdi mdi-arrow-left"></i></a>
+								<a href="#" class="link return"><i class="mdi mdi-arrow-left"></i></a>
 							</div>
 							<div class="title">Salvar arquivo</div>
 						</div>
@@ -204,12 +286,12 @@
 						<div class="navbar-bg"></div>
 						<div class="navbar-inner">
 							<div class="left">
-								<a href="#" class="link back tooltip-init" data-tooltip="Cancelar"><i
+								<a href="#" class="link return tooltip-init" data-tooltip="Cancelar"><i
 										class="mdi mdi-close"></i></a>
 							</div>
 							<div class="title">Códigos rápidos</div>
 							<div class="right">
-								<a class="link back tooltip-init" data-tooltip="Salvar" data-action="quickCodesSave"><i
+								<a class="link return tooltip-init" data-tooltip="Salvar" data-action="quickCodesSave"><i
 										class="mdi mdi-content-save"></i></a>
 								<a class="link popover-open tooltip-init" data-popover="#quickCodesMenu"
 									data-tooltip="Mais opções"><i class="mdi mdi-dots-vertical"></i></a>
@@ -267,7 +349,7 @@
 						<div class="navbar-bg"></div>
 						<div class="navbar-inner">
 							<div class="left">
-								<a href="#" class="link back"><i class="mdi mdi-arrow-left"></i></a>
+								<a href="#" class="link return"><i class="mdi mdi-arrow-left"></i></a>
 							</div>
 							<div class="title">Configurações</div>
 						</div>
@@ -700,6 +782,14 @@
 												</div>
 												<div class="item-inner">
 													<div class="item-title">Seletor de cores</div>
+												</div>
+											</a></li>
+										<li><a href="/pSearch/" class="list-button item-content panel-close">
+												<div class="item-media">
+													<div class="mdi mdi-magnify icon"></div>
+												</div>
+												<div class="item-inner">
+													<div class="item-title">Procurar pacotes</div>
 												</div>
 											</a></li>
 										<li><a class="list-button item-content popup-close" id="installApp"
