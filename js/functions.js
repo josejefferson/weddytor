@@ -148,9 +148,29 @@ function openFile() {
 	}).open();
 }
 function saveFile() {
+	editorHTML.getValue() == '' ? $('#saveFileHTML').addClass('disabled') : $('#saveFileHTML').removeClass('disabled');
+	editorCSS.getValue() == '' ? $('#saveFileCSS').addClass('disabled') : $('#saveFileCSS').removeClass('disabled');
+	editorJS.getValue() == '' ? $('#saveFileJS').addClass('disabled') : $('#saveFileJS').removeClass('disabled');
+
+	editorHTML.getValue() == '' && editorCSS.getValue() == '' && editorJS.getValue() == '' ?
+		$('#saveFileZIP').addClass('disabled') : $('#saveFileZIP').removeClass('disabled');
+
+	let zip = new JSZip();
+	editorHTML.getValue() != '' && (zip.file("index.html", editorHTML.getValue()));
+	editorCSS.getValue() != '' && (zip.file('index.css', editorCSS.getValue()));
+	editorJS.getValue() != '' && (zip.file('index.js', editorJS.getValue()));
+	zip.generateAsync({
+		type: "blob"
+	}).then(function (content) {
+		let url = window.URL.createObjectURL(content);
+		$('#saveFileZIP').attr('href', url);
+		$('#download').attr({ 'href': url, 'target': '_blank', 'download': 'download.zip' });
+	});
+
 	$('#saveFileHTML').attr('download', fileTitle + '.html');
 	$('#saveFileCSS').attr('download', fileTitle + '.css');
 	$('#saveFileJS').attr('download', fileTitle + '.js');
+	$('#saveFileZIP').attr('download', fileTitle + '.zip');
 
 	$('#saveFileHTML').attr('href', 'data:text/html,' + encodeURI(editorHTML.getValue()).replace(/#/g, '%23'));
 	$('#saveFileCSS').attr('href', 'data:text/css,' + encodeURI(editorCSS.getValue()).replace(/#/g, '%23'));
