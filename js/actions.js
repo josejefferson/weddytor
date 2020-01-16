@@ -115,7 +115,7 @@ $('#search').change(function () {
 function mountDetails(packageName) {
 	app.preloader.show();
 	$.ajax({
-		url: `https://api.cdnjs.com/libraries/${packageName}`,
+		url: `https://api.cdnjs.com/libraries/${packageName}?fields=name,filename,version,description,assets`,
 		success: function (data) {
 			latestVersion = `${data.version}` || '';
 			$('#packageName').html(`${packageName} (${latestVersion})`);
