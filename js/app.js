@@ -23,7 +23,7 @@ window.addEventListener('beforeinstallprompt', e => {
 			closeButtonText: 'Instalar'
 		}).open().on('closeButtonClick', () => installApp());
 	}
-	$.cookie('installBanner', 'true');
+	$.cookie('installBanner', 'true', { expires: 365 * 10 });
 });
 
 

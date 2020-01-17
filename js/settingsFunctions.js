@@ -97,7 +97,7 @@ function quickCodesSave() {
 		});
 	});
 
-	$.cookie('quickCodes', JSON.stringify(packages));
+	$.cookie('quickCodes', JSON.stringify(packages), { expires: 365 * 10 });
 
 	app.toast.create({
 		text: 'Códigos rápidos atualizados',
@@ -149,7 +149,7 @@ function importSettings() {
 				clearInterval(autoSave);
 				for (let cookie in $.cookie()) { $.removeCookie(cookie); }
 				let settings = JSON.parse(settingsF.result);
-				for (let sett in settings) { $.cookie(sett, settings[sett]); }
+				for (let sett in settings) { $.cookie(sett, settings[sett], { expires: 365 * 10 }); }
 				app.dialog.close('.importSettingsDialog');
 				$('.view-main').html('');
 				app.toast.create({ text: 'Configurações importadas com sucesso. Aguarde o recarregamento da página' }).open();

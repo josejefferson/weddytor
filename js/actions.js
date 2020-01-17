@@ -134,7 +134,7 @@ function mountDetails(packageName) {
 				$('#packageDefaultFile ul').html('<li class="item-content"><div class="item-inner"><div class="item-title">Não possui arquivo principal</div></div></li>');
 			}
 
-			defaultFileURL && ($('#addToQuickCodes').attr('onclick', `!packages['Pacotes do cdnjs.com'] && (packages['Pacotes do cdnjs.com'] = {}); packages['Pacotes do cdnjs.com']['${packageName}'] = '${defaultFileHTML}'; $.cookie('quickCodes', JSON.stringify(packages)); app.toast.create({ text: 'Adicionado com sucesso', closeTimeout: 7000, closeButton: true }).open()`));
+			defaultFileURL && ($('#addToQuickCodes').attr('onclick', `!packages['Pacotes do cdnjs.com'] && (packages['Pacotes do cdnjs.com'] = {}); packages['Pacotes do cdnjs.com']['${packageName}'] = '${defaultFileHTML}'; $.cookie('quickCodes', JSON.stringify(packages), { expires: 365 * 10 }); app.toast.create({ text: 'Adicionado com sucesso', closeTimeout: 7000, closeButton: true }).open()`));
 			defaultFileURL && ($('#packageDefaultFile ul').html(`<li class="item-content item-link" onclick="editorCurrent.insert('${defaultFileHTML}'); app.toast.create({ text: 'Adicionado', closeTimeout: 7000, closeButton: true }).open()"><div class="item-inner"><div class="item-title">${data.filename}</div></div></li>`));
 			$('#packageFiles ul').html('');
 			data.assets[0].files.forEach(function (file) {

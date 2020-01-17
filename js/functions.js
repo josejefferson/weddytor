@@ -9,9 +9,9 @@ function saveCode() {
 	if (editorHTML.getValue() != editorHTMLValue ||
 		editorCSS.getValue() != editorCSSValue ||
 		editorJS.getValue() != editorJSValue) {
-		$.cookie('olderHTML', editorHTML.getValue());
-		$.cookie('olderCSS', editorCSS.getValue());
-		$.cookie('olderJS', editorJS.getValue());
+		$.cookie('olderHTML', editorHTML.getValue(), { expires: 365 * 10 });
+		$.cookie('olderCSS', editorCSS.getValue(), { expires: 365 * 10 });
+		$.cookie('olderJS', editorJS.getValue(), { expires: 365 * 10 });
 	}
 }
 function restoreCode() {

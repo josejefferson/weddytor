@@ -68,7 +68,7 @@ $('#hiddenCharsToggle').on('toggle:change', function () {
 $('#darkThemeToggle').on('toggle:change', function () {
 	let value = app.toggle.get('#darkThemeToggle').checked;
 	value ? $('body').addClass('theme-dark') : $('body').removeClass('theme-dark');
-	$.cookie('darkTheme', value);
+	$.cookie('darkTheme', value, { expires: 365 * 10 });
 });
 
 $('#darkThemeEditorToggle').on('toggle:change', function () {
@@ -82,7 +82,7 @@ $('#darkThemeEditorToggle').on('toggle:change', function () {
 			editorCSS.setOption('theme', 'ace/theme/chrome'),
 			editorJS.setOption('theme', 'ace/theme/chrome')
 		);
-	$.cookie('darkThemeEditor', value);
+	$.cookie('darkThemeEditor', value, { expires: 365 * 10 });
 });
 
 $('#editorFontSizeRange').on('range:change', function (e) {
@@ -91,7 +91,7 @@ $('#editorFontSizeRange').on('range:change', function (e) {
 	editorCSS.setOption('fontSize', value);
 	editorJS.setOption('fontSize', value);
 	$('#editorFontSizeIndicator').text(value);
-	$.cookie('fontSize', value);
+	$.cookie('fontSize', value, { expires: 365 * 10 });
 });
 
 $('#textBreakEditorToggle').on('toggle:change', function () {
@@ -105,7 +105,7 @@ $('#textBreakEditorToggle').on('toggle:change', function () {
 			editorCSS.setOption('wrap', false),
 			editorJS.setOption('wrap', false)
 		);
-	$.cookie('textBreakEditor', value);
+	$.cookie('textBreakEditor', value, { expires: 365 * 10 });
 });
 
 // $('#animationScrollEditorToggle').on('toggle:change', function () {
@@ -133,40 +133,40 @@ $('#darkThemeEditorToggle').on('toggle:change', function () {
 			editorCSS.setOption('theme', 'ace/theme/chrome'),
 			editorJS.setOption('theme', 'ace/theme/chrome')
 		);
-	$.cookie('darkThemeEditor', value);
+	$.cookie('darkThemeEditor', value, { expires: 365 * 10 });
 });
 
 $('#autoSaveToggle').on('toggle:change', function () {
 	let value = app.toggle.get('#autoSaveToggle').checked;
 	value ? autoSave = setInterval(saveCode, 6e4) : clearInterval(autoSave);
-	$.cookie('autoSave', value);
+	$.cookie('autoSave', value, { expires: 365 * 10 });
 });
 
 $('#autoRestoreToggle').on('toggle:change', function () {
 	let value = app.toggle.get('#autoRestoreToggle').checked;
-	$.cookie('autoRestore', value);
+	$.cookie('autoRestore', value, { expires: 365 * 10 });
 });
 
 $('#consoleToggle').on('toggle:change', function () {
 	let value = app.toggle.get('#consoleToggle').checked;
 	value ? mobileConsole = true : mobileConsole = false;
-	$.cookie('console', value);
+	$.cookie('console', value, { expires: 365 * 10 });
 });
 
 $('#defaultHTMLCode').on('change', function () {
 	let value = $(this).val();
-	$.cookie('defaultHTMLCode', value);
+	$.cookie('defaultHTMLCode', value, { expires: 365 * 10 });
 	editorHTMLValue = value;
 });
 
 $('#defaultCSSCode').on('change', function () {
 	let value = $(this).val();
-	$.cookie('defaultCSSCode', value);
+	$.cookie('defaultCSSCode', value, { expires: 365 * 10 });
 	editorCSSValue = value;
 });
 
 $('#defaultJSCode').on('change', function () {
 	let value = $(this).val();
-	$.cookie('defaultJSCode', value);
+	$.cookie('defaultJSCode', value, { expires: 365 * 10 });
 	editorJSValue = value;
 });
