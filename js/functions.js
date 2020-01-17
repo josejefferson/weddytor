@@ -124,16 +124,16 @@ function openFile() {
 					cssFile && cssF.readAsText(cssFile);
 					jsFile && jsF.readAsText(jsFile);
 
-					editorHTML.setValue('');
-					editorCSS.setValue('');
-					editorJS.setValue('');
+					htmlFile && editorHTML.setValue('');
+					cssFile && editorCSS.setValue('');
+					jsFile && editorJS.setValue('');
 
 					htmlF.onload = function () { editorHTML.setValue(htmlF.result || ''); editorHTML.navigateFileEnd(); }
 					cssF.onload = function () { editorCSS.setValue(cssF.result || ''); editorCSS.navigateFileEnd(); }
 					jsF.onload = function () { editorJS.setValue(jsF.result || ''); editorJS.navigateFileEnd(); }
 
 					app.toast.create({
-						text: 'Arquivos abertos',
+						text: 'Arquivo(s) aberto(s)',
 						closeTimeout: 7000,
 						closeButton: true
 					}).open();
