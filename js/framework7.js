@@ -2,7 +2,7 @@
 var app = new Framework7({
 	root: '#app',
 	name: 'Weddytor',
-	id: 'com.josejefferson.weddytor',
+	id: 'com.jeffersondantas.weddytor',
 	routes: [
 		{ name: 'home', path: '/', pageName: 'home' },
 		{ name: 'result', path: '/result/', pageName: 'result' },
