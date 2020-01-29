@@ -38,6 +38,7 @@ $('[data-action]').click(function () {
 		case 'deleteSavedCodes': deleteSavedCodes(); break;
 		case 'exportSettings': exportSettings(); break;
 		case 'feditor': initFEditor(); break;
+		case 'feedback': $('#feedbackIFrame').attr('src', feedbackSrc); break;
 		case 'insertColorHEX': editorCurrent.insert(getColorPicker().hex); break;
 		case 'insertColorRGB': editorCurrent.insert(getColorPicker().rgb); break;
 		case 'insertColorRGBA': editorCurrent.insert(getColorPicker().rgba); break;

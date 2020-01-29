@@ -7,6 +7,7 @@ var packages = defaultPackages; // Define os códigos rápidos
 var editorHTMLValue = defaultEditorHTMLValue; // Define o código padrão HTML
 var editorCSSValue = defaultEditorCSSValue; // Define o código padrão CSS
 var editorJSValue = defaultEditorJSValue; // Define o código padrão JS
+var feedbackSrc = 'https://docs.google.com/forms/d/e/1FAIpQLScAUJafppfs1sJhgRuVrtX0MKQRMl4NDX4smA-ReBXs9nUnUA/viewform?embedded=true';
 var mobileConsole = true; // Define se utilizará um console no resultado
 var editorOptions = { // Opções do Ace Editor
 	autoScrollEditorIntoView: true,

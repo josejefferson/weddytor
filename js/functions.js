@@ -198,11 +198,6 @@ function about() {
 	app.dialog.create({
 		title: 'Sobre o Weddytor',
 		text: `Weddytor v${appVersion}<br>Copyright © Jefferson Dantas 2020`,
-		buttons: [{ text: 'OK' }, {
-			text: 'Licença',
-			onClick: function () {
-				window.open('LICENSE.txt', '_blank');
-			}
-		}]
+		buttons: [{ text: 'OK' }]
 	}).open();
 }
