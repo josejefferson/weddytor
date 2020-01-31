@@ -26,6 +26,15 @@ $('.return').click(function () {
 	app.views.main.router.back();
 });
 
+$('.editor').keyup(function (e) {
+	$(document).keyup(function (e) {
+		if (e.keyCode == 27) {
+			editorBlur();
+			editorCurrent.blur();
+		}
+	});
+});
+
 // Ações
 $('[data-action]').click(function () {
 	let action = $(this).data('action');
