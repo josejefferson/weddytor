@@ -51,11 +51,13 @@ $('#quickCharacters .link#toolbarTab').on('click contextmenu', function () {
 });
 
 function editorFocus() {
-	app.navbar.hide('.navbar');
-	app.toolbar.hide('.toolbar.toolbar-top');
-	app.toolbar.show('.toolbar.toolbar-bottom');
-	$('.tab').addClass('no-padding-top').removeClass('no-padding-bottom');
-	$('.fab').fadeOut();
+	if (!Framework7.device.desktop) {
+		app.navbar.hide('.navbar');
+		app.toolbar.hide('.toolbar.toolbar-top');
+		app.toolbar.show('.toolbar.toolbar-bottom');
+		$('.tab').addClass('no-padding-top').removeClass('no-padding-bottom');
+		$('.fab').fadeOut();
+	}
 }
 function editorBlur() {
 	updateTitle();
