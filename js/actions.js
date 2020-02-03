@@ -59,6 +59,7 @@ $('[data-action]').click(function () {
 		case 'quickCodesRestore': quickCodesRestore(); break;
 		case 'quickCodesSave': quickCodesSave(); break;
 		case 'redo': editorCurrent.redo(); break;
+		case 'refreshResult': reloadHTML(); break;
 		case 'restoreDefaultSettings': restoreDefaultSettings(); break;
 		case 'restoreHTMLDefaultCode': $('#defaultHTMLCode').val(defaultEditorHTMLValue); $.removeCookie('defaultHTMLCode'); break;
 		case 'restoreCSSDefaultCode': $('#defaultCSSCode').val(defaultEditorCSSValue); $.removeCookie('defaultCSSCode'); break;
