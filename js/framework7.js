@@ -15,7 +15,8 @@ var app = new Framework7({
 		{ name: 'pSearch', path: '/pSearch/', pageName: 'pSearch' },
 		{ name: 'pSearchDetails', path: '/pSearchDetails/', pageName: 'pSearchDetails' },
 		{ name: 'feedback', path: '/feedback/', pageName: 'feedback' },
-	]
+	],
+	theme: 'md'
 });
 
 var mainView = app.views.create('.view-main', {

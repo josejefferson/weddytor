@@ -81,6 +81,10 @@
 	text-align: center;
 }
 
+:root.ios #searchPackageFiles {
+	background: none;
+}
+
 .toast-button {
 	color: var(--f7-color-amber) !important;
 }
