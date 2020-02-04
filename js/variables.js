@@ -3,7 +3,7 @@ var appVersion = '1.0.0-beta';
 var autoSave; // Guarda o timer do auto salvamento
 var currentTab = 'tab-html'; // Guia atual
 var fileTitle = 'Sem título'; // Título do arquivo
-var packages = defaultPackages; // Define os códigos rápidos
+var packages = defaultPackages; // Define as bibliotecas e códigos rápidos
 var editorHTMLValue = defaultEditorHTMLValue; // Define o código padrão HTML
 var editorCSSValue = defaultEditorCSSValue; // Define o código padrão CSS
 var editorJSValue = defaultEditorJSValue; // Define o código padrão JS
@@ -23,7 +23,7 @@ var shareDetails = {
 	url: 'https://josejefferson.github.io/weddytor/#!/'
 }
 
-// Estrutura do editor de códigos rápidos
+// Estrutura do editor de bibliotecas e códigos rápidos
 var newItemHTML = '<li class="accordion-item quickCodesItem">' +
 	'	<a class="item-content item-link item-input">' +
 	'		<div class="item-inner">' +

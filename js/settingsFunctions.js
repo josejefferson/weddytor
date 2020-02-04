@@ -100,15 +100,15 @@ function quickCodesSave() {
 	$.cookie('quickCodes', JSON.stringify(packages), { expires: 365 * 10 });
 
 	app.toast.create({
-		text: 'Códigos rápidos atualizados',
+		text: 'Bibliotecas e códigos rápidos atualizados',
 		closeTimeout: 7000,
 		closeButton: true,
 	}).open();
 }
 function quickCodesRestore() {
 	app.dialog.create({
-		title: 'Restaurar códigos rápidos',
-		text: 'Tem certeza que deseja restaurar os códigos rápidos padrão?',
+		title: 'Restaurar bibliotecas e códigos rápidos',
+		text: 'Tem certeza que deseja restaurar as bibliotecas e códigos rápidos padrão?',
 		buttons: [
 			{
 				text: 'Sim',
@@ -117,7 +117,7 @@ function quickCodesRestore() {
 					quickCodesMount();
 					$.removeCookie('quickCodes');
 					app.toast.create({
-						text: 'Códigos rápidos padrão restaurados',
+						text: 'Bibliotecas e códigos rápidos padrão restaurados',
 						closeTimeout: 7000,
 						closeButton: true,
 					}).open();
