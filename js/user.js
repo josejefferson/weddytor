@@ -1,7 +1,7 @@
 var defaultEditorHTMLValue = '<!DOCTYPE html>\n<html lang="pt-br">\n<head>\n\t<meta charset="UTF-8">\n\t<meta name="viewport" content="width=device-width, initial-scale=1.0">\n\t<title></title>\n</head>\n<body>\n\t<h1>Hello World</h1>\n</body>\n</html>';
 var defaultEditorCSSValue = '';
 var defaultEditorJSValue = '';
-var mobileConsoleCode = '<script src="https://cdnjs.cloudflare.com/ajax/libs/eruda/1.5.8/eruda.min.js"></script><script>eruda.init()</script>';
+var mobileConsoleCode = '<script src="https://cdn.jsdelivr.net/npm/eruda"></script><script>eruda.init()</script>';
 var defaultPackages = {
 	'CSS': {
 		'Bootstrap': '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">',
