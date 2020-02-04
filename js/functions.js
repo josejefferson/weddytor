@@ -1,3 +1,11 @@
+function copy(text) {
+	var el = document.createElement('textarea');
+	el.value = text;
+	document.body.appendChild(el);
+	el.select();
+	document.execCommand('copy');
+	document.body.removeChild(el);
+}
 function updateTitle() {
 	let regexTitle = /<title[^>]*>([^<]+)<\/title>/;
 	fileTitle = regexTitle.test(editorHTML.getValue()) ?
