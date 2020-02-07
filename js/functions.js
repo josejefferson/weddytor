@@ -164,9 +164,9 @@ function saveFile() {
 		$('#saveFileZIP').addClass('disabled') : $('#saveFileZIP').removeClass('disabled');
 
 	let zip = new JSZip();
-	editorHTML.getValue() != '' && (zip.file("index.html", editorHTML.getValue()));
-	editorCSS.getValue() != '' && (zip.file('index.css', editorCSS.getValue()));
-	editorJS.getValue() != '' && (zip.file('index.js', editorJS.getValue()));
+	editorHTML.getValue() != '' && (zip.file("index.html", (watermark ? HTMLWatermark : '') + editorHTML.getValue()));
+	editorCSS.getValue() != '' && (zip.file('index.css', (watermark ? CSSWatermark : '') + editorCSS.getValue()));
+	editorJS.getValue() != '' && (zip.file('index.js', (watermark ? JSWatermark : '') + editorJS.getValue()));
 	zip.generateAsync({
 		type: "blob"
 	}).then(function (content) {
@@ -180,9 +180,9 @@ function saveFile() {
 	$('#saveFileJS').attr('download', fileTitle + '.js');
 	$('#saveFileZIP').attr('download', fileTitle + '.zip');
 
-	$('#saveFileHTML').attr('href', 'data:text/html,' + encodeURI(editorHTML.getValue()).replace(/#/g, '%23'));
-	$('#saveFileCSS').attr('href', 'data:text/css,' + encodeURI(editorCSS.getValue()).replace(/#/g, '%23'));
-	$('#saveFileJS').attr('href', 'data:text/javascript,' + encodeURI(editorJS.getValue()).replace(/#/g, '%23'));
+	$('#saveFileHTML').attr('href', 'data:text/html,' + encodeURI((watermark ? HTMLWatermark : '') + editorHTML.getValue()).replace(/#/g, '%23'));
+	$('#saveFileCSS').attr('href', 'data:text/css,' + encodeURI((watermark ? CSSWatermark : '') + editorCSS.getValue()).replace(/#/g, '%23'));
+	$('#saveFileJS').attr('href', 'data:text/javascript,' + encodeURI((watermark ? JSWatermark : '') + editorJS.getValue()).replace(/#/g, '%23'));
 }
 function addPackageMount() {
 	let html = '';

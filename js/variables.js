@@ -9,6 +9,7 @@ var editorCSSValue = defaultEditorCSSValue; // Define o código padrão CSS
 var editorJSValue = defaultEditorJSValue; // Define o código padrão JS
 var feedbackSrc = 'https://docs.google.com/forms/d/e/1FAIpQLScAUJafppfs1sJhgRuVrtX0MKQRMl4NDX4smA-ReBXs9nUnUA/viewform?embedded=true';
 var mobileConsole = true; // Define se utilizará um console no resultado
+var watermark = true; // Define se deve-se incluir marca d'água no arquivo
 var editorOptions = { // Opções do Ace Editor
 	autoScrollEditorIntoView: true,
 	fontSize: 14,

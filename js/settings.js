@@ -47,6 +47,11 @@ $(document).ready(function () {
 		app.toggle.get('#consoleToggle').checked = false
 	) : mobileConsole = true;
 
+	$.cookie('watermark') == 'false' ? (
+		watermark = false,
+		app.toggle.get('#watermarkToggle').checked = false
+	) : watermark = true;
+
 	$('#defaultHTMLCode').val($.cookie('defaultHTMLCode') != undefined ? $.cookie('defaultHTMLCode') : editorHTMLValue);
 	$('#defaultCSSCode').val($.cookie('defaultCSSCode') != undefined ? $.cookie('defaultCSSCode') : editorCSSValue);
 	$('#defaultJSCode').val($.cookie('defaultJSCode') != undefined ? $.cookie('defaultJSCode') : editorJSValue);
@@ -130,6 +135,12 @@ $('#consoleToggle').on('toggle:change', function () {
 	let value = app.toggle.get('#consoleToggle').checked;
 	value ? mobileConsole = true : mobileConsole = false;
 	$.cookie('console', value, { expires: 365 * 10 });
+});
+
+$('#watermarkToggle').on('toggle:change', function () {
+	let value = app.toggle.get('#watermarkToggle').checked;
+	value ? watermark = true : watermark = false;
+	$.cookie('watermark', value, { expires: 365 * 10 });
 });
 
 $('#defaultHTMLCode').on('change', function () {
