@@ -22,10 +22,6 @@ $(document).not('input, textarea').add('.editor').on('contextmenu', function () 
 	return false;
 });
 
-$('.return').click(function () {
-	app.views.main.router.back();
-});
-
 $('.editor').keyup(function (e) {
 	$(document).keyup(function (e) {
 		if (e.keyCode == 27) {
