@@ -36,16 +36,16 @@ $('.tab').on('tab:show', function () {
 editorHTML.on('focus', editorFocus);
 editorCSS.on('focus', editorFocus);
 editorJS.on('focus', editorFocus);
-$('#toolbarX').click(editorBlur);
+$('.toolbarX').click(editorBlur);
 
 // Configuração da barra de ferramentas com caracteres rápidos
-$('#quickCharacters .link:not(#toolbarX):not(#toolbarTab)').on('click contextmenu', function () {
+$('#quickCharacters .link:not(.toolbarX):not(.toolbarTab)').on('click contextmenu', function () {
 	let char = $(this).text();
 	editorCurrent.insert(char);
 	editorCurrent.focus();
 });
 
-$('#quickCharacters .link#toolbarTab').on('click contextmenu', function () {
+$('#quickCharacters .link.toolbarTab').on('click contextmenu', function () {
 	editorCurrent.insert('\t');
 	editorCurrent.focus();
 });
@@ -54,7 +54,11 @@ function editorFocus() {
 	if (!Framework7.device.desktop) {
 		app.navbar.hide('.navbar');
 		app.toolbar.hide('.toolbar.toolbar-top');
-		app.toolbar.show('.toolbar.toolbar-bottom');
+		switch (editorCurrent) {
+			case editorHTML: app.toolbar.show('.htmlQuickCharacters'); break;
+			case editorCSS: app.toolbar.show('.cssQuickCharacters'); break;
+			case editorJS: app.toolbar.show('.jsQuickCharacters'); break;
+		}
 		$('.tab').addClass('no-padding-top').removeClass('no-padding-bottom');
 		$('.fab').fadeOut();
 	}
@@ -63,7 +67,9 @@ function editorBlur() {
 	updateTitle();
 	app.navbar.show('.navbar');
 	app.toolbar.show('.toolbar.toolbar-top');
-	app.toolbar.hide('.toolbar.toolbar-bottom');
+	app.toolbar.hide('.htmlQuickCharacters');
+	app.toolbar.hide('.cssQuickCharacters');
+	app.toolbar.hide('.jsQuickCharacters');
 	$('.tab').removeClass('no-padding-top').addClass('no-padding-bottom');
 	$('.fab').fadeIn();
 }
