@@ -186,6 +186,9 @@ function saveFile() {
 }
 function addPackageMount() {
 	let html = '';
+	html += `<div class="actions-group">`;
+	html += `	<div class="actions-button actions-close color-red">FECHAR</div>`;
+	html += `</div>`;
 	for (let group in packages) {
 		let itemHTML = '';
 		for (let item in packages[group]) {
@@ -196,9 +199,6 @@ function addPackageMount() {
 		html += `	${itemHTML}`;
 		html += `</div>`;
 	}
-	html += `<div class="actions-group">`;
-	html += `	<div class="actions-button actions-close color-red">FECHAR</div>`;
-	html += `</div>`;
 
 	$('#addPackage').html(html);
 }
