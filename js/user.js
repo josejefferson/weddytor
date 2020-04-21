@@ -2,9 +2,9 @@ var defaultEditorHTMLValue = '<!DOCTYPE html>\n<html lang="pt-br">\n<head>\n\t<m
 var defaultEditorCSSValue = '';
 var defaultEditorJSValue = '';
 var mobileConsoleCode = '<script src="https://cdn.jsdelivr.net/npm/eruda"></script><script>eruda.init()</script>';
-var HTMLWatermark = '<!-- Criado com Weddytor (https://josejefferson.github.io/weddytor/) -->\n';
-var CSSWatermark = '/* Criado com Weddytor (https://josejefferson.github.io/weddytor/) */\n';
-var JSWatermark = '// Criado com Weddytor (https://josejefferson.github.io/weddytor/)\n';
+var htmlWatermark = '<!-- Criado com Weddytor (https://josejefferson.github.io/weddytor/) -->\n';
+var cssWatermark = '/* Criado com Weddytor (https://josejefferson.github.io/weddytor/) */\n';
+var jsWatermark = '// Criado com Weddytor (https://josejefferson.github.io/weddytor/)\n';
 var defaultPackages = {
 	'CSS': {
 		'Bootstrap': '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css">',

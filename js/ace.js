@@ -12,9 +12,9 @@ editorCSS.renderer.setScrollMargin(5, 5);
 editorJS.renderer.setScrollMargin(5, 5);
 
 // Definir o valor inicial dos editores
-editorHTML.setValue($.cookie('defaultHTMLCode') != undefined ? $.cookie('defaultHTMLCode') : editorHTMLValue);
-editorCSS.setValue($.cookie('defaultCSSCode') != undefined ? $.cookie('defaultCSSCode') : editorCSSValue);
-editorJS.setValue($.cookie('defaultJSCode') != undefined ? $.cookie('defaultJSCode') : editorJSValue);
+editorHTML.setValue(localStorage.getItem('defaultHTMLCode') != undefined ? localStorage.getItem('defaultHTMLCode') : editorHTMLValue);
+editorCSS.setValue(localStorage.getItem('defaultCSSCode') != undefined ? localStorage.getItem('defaultCSSCode') : editorCSSValue);
+editorJS.setValue(localStorage.getItem('defaultJSCode') != undefined ? localStorage.getItem('defaultJSCode') : editorJSValue);
 updateTitle();
 editorHTML.clearSelection();
 editorCSS.clearSelection();
@@ -72,6 +72,7 @@ function editorBlur() {
 	app.toolbar.hide('.jsQuickCharacters');
 	$('.tab').removeClass('no-padding-top').addClass('no-padding-bottom');
 	$('.fab').fadeIn();
+	localStorage.getItem('autoSave') == 'true' && saveCode();
 }
 
 // Configuração do gerenciador de pacotes

@@ -1,6 +1,6 @@
 let deferredPrompt;
 let setupButton;
-let showInstallBanner = $.cookie('installBanner') == 'true' || false;
+let showInstallBanner = localStorage.getItem('installBanner') == 'true' || false;
 $('#installApp').hide();
 
 if ('serviceWorker' in navigator) {
@@ -23,7 +23,7 @@ window.addEventListener('beforeinstallprompt', e => {
 			closeButtonText: 'Instalar'
 		}).open().on('closeButtonClick', () => installApp());
 	}
-	$.cookie('installBanner', 'true', { expires: 365 * 10 });
+	localStorage.setItem('installBanner', 'true');
 });
 
 

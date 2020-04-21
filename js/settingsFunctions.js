@@ -97,7 +97,7 @@ function quickCodesSave() {
 		});
 	});
 
-	$.cookie('quickCodes', JSON.stringify(packages), { expires: 365 * 10 });
+	localStorage.setItem('quickCodes', JSON.stringify(packages));
 
 	app.toast.create({
 		text: 'Bibliotecas e códigos rápidos atualizados',
@@ -147,9 +147,9 @@ function importSettings() {
 			try {
 				$(window).off('beforeunload');
 				clearInterval(autoSave);
-				for (let cookie in $.cookie()) { $.removeCookie(cookie); }
+				localStorage.clear();
 				let settings = JSON.parse(settingsF.result);
-				for (let sett in settings) { $.cookie(sett, settings[sett], { expires: 365 * 10 }); }
+				for (let sett in settings) { localStorage.setItem(sett, settings[sett]); }
 				app.dialog.close('.importSettingsDialog');
 				$('.view-main').html('');
 				app.toast.create({ text: 'Configurações importadas com sucesso. Aguarde o recarregamento da página' }).open();
@@ -167,7 +167,7 @@ function importSettings() {
 	});
 }
 function exportSettings() {
-	let settings = JSON.stringify($.cookie());
+	let settings = JSON.stringify(localStorage);
 	app.dialog.create({
 		title: 'Exportar configurações',
 		text: 'Exporte os dados deste app para um arquivo',
@@ -196,7 +196,7 @@ function restoreDefaultSettings() {
 								onClick: function () {
 									$(window).off('beforeunload');
 									clearInterval(autoSave);
-									for (var cookie in $.cookie()) { $.removeCookie(cookie); }
+									localStorage.clear();
 									$('.view-main').html('');
 									app.toast.create({ text: 'Configurações padrão restauradas com sucesso. Aguarde o recarregamento da página' }).open();
 									window.location.reload();

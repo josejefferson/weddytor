@@ -1,40 +1,40 @@
 $(document).ready(function () {
-	$.cookie('defaultHTMLCode') != undefined ? editorHTMLValue = $.cookie('defaultHTMLCode') : false;
-	$.cookie('defaultCSSCode') != undefined ? editorCSSValue = $.cookie('defaultCSSCode') : false;
-	$.cookie('defaultJSCode') != undefined ? editorJSValue = $.cookie('defaultJSCode') : false;
+	localStorage.getItem('defaultHTMLCode') != undefined ? editorHTMLValue = localStorage.getItem('defaultHTMLCode') : false;
+	localStorage.getItem('defaultCSSCode') != undefined ? editorCSSValue = localStorage.getItem('defaultCSSCode') : false;
+	localStorage.getItem('defaultJSCode') != undefined ? editorJSValue = localStorage.getItem('defaultJSCode') : false;
 
-	$.cookie('darkTheme') == 'true' && ($('body').addClass('theme-dark'), $('#darkTheme').prop('checked', true));
+	localStorage.getItem('darkTheme') == 'true' && ($('body').addClass('theme-dark'), $('#darkTheme').prop('checked', true));
 
-	$.cookie('darkThemeEditor') == 'false' && (
+	localStorage.getItem('darkThemeEditor') == 'false' && (
 		editorHTML.setOption('theme', 'ace/theme/chrome'),
 		editorCSS.setOption('theme', 'ace/theme/chrome'),
 		editorJS.setOption('theme', 'ace/theme/chrome'),
 		$('#darkThemeEditor').prop('checked', false));
 
-	$.cookie('textBreakEditor') == 'true' && (
+	localStorage.getItem('textBreakEditor') == 'true' && (
 		editorHTML.setOption('wrap', true),
 		editorCSS.setOption('wrap', true),
 		editorJS.setOption('wrap', true),
 		$('#textBreakEditor').prop('checked', true)
 	);
 
-	$.cookie('fontSize') && (
-		editorHTML.setOption('fontSize', Number($.cookie('fontSize'))),
-		editorCSS.setOption('fontSize', Number($.cookie('fontSize'))),
-		editorJS.setOption('fontSize', Number($.cookie('fontSize'))),
-		app.range.get('#editorFontSizeRange').setValue(Number($.cookie('fontSize'))),
-		$('#editorFontSizeIndicator').text($.cookie('fontSize'))
+	localStorage.getItem('fontSize') && (
+		editorHTML.setOption('fontSize', Number(localStorage.getItem('fontSize'))),
+		editorCSS.setOption('fontSize', Number(localStorage.getItem('fontSize'))),
+		editorJS.setOption('fontSize', Number(localStorage.getItem('fontSize'))),
+		app.range.get('#editorFontSizeRange').setValue(Number(localStorage.getItem('fontSize'))),
+		$('#editorFontSizeIndicator').text(localStorage.getItem('fontSize'))
 	);
 
-	$.cookie('autoSave') == 'false' ? (
+	localStorage.getItem('autoSave') == 'false' ? (
 		clearInterval(autoSave),
 		app.toggle.get('#autoSaveToggle').checked = false
 	) : autoSave = setInterval(saveCode, 6e4);
 
-	$.cookie('autoRestore') == 'false' ? app.toggle.get('#autoRestoreToggle').checked = false : false;
+	localStorage.getItem('autoRestore') == 'false' ? app.toggle.get('#autoRestoreToggle').checked = false : false;
 
-	if (($.cookie('olderHTML') || $.cookie('olderCSS') || $.cookie('olderJS'))) {
-		$.cookie('autoRestore') == 'false' ? app.toast.create({
+	if ((localStorage.getItem('olderHTML') || localStorage.getItem('olderCSS') || localStorage.getItem('olderJS'))) {
+		localStorage.getItem('autoRestore') == 'false' ? app.toast.create({
 			text: 'Restaurar sessão anterior?',
 			closeTimeout: 7000,
 			closeButton: true,
@@ -42,21 +42,21 @@ $(document).ready(function () {
 		}).open().on('closeButtonClick', restoreCode) : restoreCode();
 	}
 
-	$.cookie('console') == 'false' ? (
+	localStorage.getItem('console') == 'false' ? (
 		mobileConsole = false,
 		app.toggle.get('#consoleToggle').checked = false
 	) : mobileConsole = true;
 
-	$.cookie('watermark') == 'false' ? (
+	localStorage.getItem('watermark') == 'false' ? (
 		watermark = false,
 		app.toggle.get('#watermarkToggle').checked = false
 	) : watermark = true;
 
-	$('#defaultHTMLCode').val($.cookie('defaultHTMLCode') != undefined ? $.cookie('defaultHTMLCode') : editorHTMLValue);
-	$('#defaultCSSCode').val($.cookie('defaultCSSCode') != undefined ? $.cookie('defaultCSSCode') : editorCSSValue);
-	$('#defaultJSCode').val($.cookie('defaultJSCode') != undefined ? $.cookie('defaultJSCode') : editorJSValue);
+	$('#defaultHTMLCode').val(localStorage.getItem('defaultHTMLCode') != undefined ? localStorage.getItem('defaultHTMLCode') : editorHTMLValue);
+	$('#defaultCSSCode').val(localStorage.getItem('defaultCSSCode') != undefined ? localStorage.getItem('defaultCSSCode') : editorCSSValue);
+	$('#defaultJSCode').val(localStorage.getItem('defaultJSCode') != undefined ? localStorage.getItem('defaultJSCode') : editorJSValue);
 
-	$.cookie('quickCodes') ? packages = JSON.parse($.cookie('quickCodes')) : false;
+	localStorage.getItem('quickCodes') ? packages = JSON.parse(localStorage.getItem('quickCodes')) : false;
 });
 
 $('#hiddenCharsToggle').on('toggle:change', function () {
@@ -66,7 +66,7 @@ $('#hiddenCharsToggle').on('toggle:change', function () {
 $('#darkThemeToggle').on('toggle:change', function () {
 	let value = app.toggle.get('#darkThemeToggle').checked;
 	value ? $('body').addClass('theme-dark') : $('body').removeClass('theme-dark');
-	$.cookie('darkTheme', value, { expires: 365 * 10 });
+	localStorage.setItem('darkTheme', value);
 });
 
 $('#darkThemeEditorToggle').on('toggle:change', function () {
@@ -80,7 +80,7 @@ $('#darkThemeEditorToggle').on('toggle:change', function () {
 			editorCSS.setOption('theme', 'ace/theme/chrome'),
 			editorJS.setOption('theme', 'ace/theme/chrome')
 		);
-	$.cookie('darkThemeEditor', value, { expires: 365 * 10 });
+	localStorage.setItem('darkThemeEditor', value);
 });
 
 $('#editorFontSizeRange').on('range:change', function (e) {
@@ -89,7 +89,7 @@ $('#editorFontSizeRange').on('range:change', function (e) {
 	editorCSS.setOption('fontSize', value);
 	editorJS.setOption('fontSize', value);
 	$('#editorFontSizeIndicator').text(value);
-	$.cookie('fontSize', value, { expires: 365 * 10 });
+	localStorage.setItem('fontSize', value);
 });
 
 $('#textBreakEditorToggle').on('toggle:change', function () {
@@ -103,7 +103,7 @@ $('#textBreakEditorToggle').on('toggle:change', function () {
 			editorCSS.setOption('wrap', false),
 			editorJS.setOption('wrap', false)
 		);
-	$.cookie('textBreakEditor', value, { expires: 365 * 10 });
+	localStorage.setItem('textBreakEditor', value);
 });
 
 $('#darkThemeEditorToggle').on('toggle:change', function () {
@@ -117,46 +117,46 @@ $('#darkThemeEditorToggle').on('toggle:change', function () {
 			editorCSS.setOption('theme', 'ace/theme/chrome'),
 			editorJS.setOption('theme', 'ace/theme/chrome')
 		);
-	$.cookie('darkThemeEditor', value, { expires: 365 * 10 });
+	localStorage.setItem('darkThemeEditor', value);
 });
 
 $('#autoSaveToggle').on('toggle:change', function () {
 	let value = app.toggle.get('#autoSaveToggle').checked;
 	value ? autoSave = setInterval(saveCode, 6e4) : clearInterval(autoSave);
-	$.cookie('autoSave', value, { expires: 365 * 10 });
+	localStorage.setItem('autoSave', value);
 });
 
 $('#autoRestoreToggle').on('toggle:change', function () {
 	let value = app.toggle.get('#autoRestoreToggle').checked;
-	$.cookie('autoRestore', value, { expires: 365 * 10 });
+	localStorage.setItem('autoRestore', value);
 });
 
 $('#consoleToggle').on('toggle:change', function () {
 	let value = app.toggle.get('#consoleToggle').checked;
 	value ? mobileConsole = true : mobileConsole = false;
-	$.cookie('console', value, { expires: 365 * 10 });
+	localStorage.setItem('console', value);
 });
 
 $('#watermarkToggle').on('toggle:change', function () {
 	let value = app.toggle.get('#watermarkToggle').checked;
 	value ? watermark = true : watermark = false;
-	$.cookie('watermark', value, { expires: 365 * 10 });
+	localStorage.setItem('watermark', value);
 });
 
 $('#defaultHTMLCode').on('change', function () {
 	let value = $(this).val();
-	$.cookie('defaultHTMLCode', value, { expires: 365 * 10 });
+	localStorage.setItem('defaultHTMLCode', value);
 	editorHTMLValue = value;
 });
 
 $('#defaultCSSCode').on('change', function () {
 	let value = $(this).val();
-	$.cookie('defaultCSSCode', value, { expires: 365 * 10 });
+	localStorage.setItem('defaultCSSCode', value);
 	editorCSSValue = value;
 });
 
 $('#defaultJSCode').on('change', function () {
 	let value = $(this).val();
-	$.cookie('defaultJSCode', value, { expires: 365 * 10 });
+	localStorage.setItem('defaultJSCode', value);
 	editorJSValue = value;
 });

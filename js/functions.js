@@ -17,15 +17,15 @@ function saveCode() {
 	if (editorHTML.getValue() != editorHTMLValue ||
 		editorCSS.getValue() != editorCSSValue ||
 		editorJS.getValue() != editorJSValue) {
-		$.cookie('olderHTML', editorHTML.getValue(), { expires: 365 * 10 });
-		$.cookie('olderCSS', editorCSS.getValue(), { expires: 365 * 10 });
-		$.cookie('olderJS', editorJS.getValue(), { expires: 365 * 10 });
+		localStorage.setItem('olderHTML', editorHTML.getValue());
+		localStorage.setItem('olderCSS', editorCSS.getValue());
+		localStorage.setItem('olderJS', editorJS.getValue());
 	}
 }
 function restoreCode() {
-	editorHTML.setValue($.cookie('olderHTML'));
-	editorCSS.setValue($.cookie('olderCSS'));
-	editorJS.setValue($.cookie('olderJS'));
+	editorHTML.setValue(localStorage.getItem('olderHTML'));
+	editorCSS.setValue(localStorage.getItem('olderCSS'));
+	editorJS.setValue(localStorage.getItem('olderJS'));
 	editorHTML.navigateFileEnd();
 	editorCSS.navigateFileEnd();
 	editorJS.navigateFileEnd();
@@ -136,9 +136,9 @@ function openFile() {
 					cssFile && editorCSS.setValue('');
 					jsFile && editorJS.setValue('');
 
-					htmlF.onload = function () { editorHTML.setValue(htmlF.result || ''); editorHTML.navigateFileEnd(); }
-					cssF.onload = function () { editorCSS.setValue(cssF.result || ''); editorCSS.navigateFileEnd(); }
-					jsF.onload = function () { editorJS.setValue(jsF.result || ''); editorJS.navigateFileEnd(); }
+					htmlF.onload = function () { editorHTML.setValue(htmlF.result.startsWith(htmlWatermark) ? htmlF.result.substring(htmlWatermark.length) : htmlF.result || ''); editorHTML.navigateFileEnd(); }
+					cssF.onload = function () { editorCSS.setValue(cssF.result.startsWith(cssWatermark) ? cssF.result.substring(cssWatermark.length) : cssF.result || ''); editorCSS.navigateFileEnd(); }
+					jsF.onload = function () { editorJS.setValue(jsF.result.startsWith(jsWatermark) ? jsF.result.substring(jsWatermark.length) : jsF.result || ''); editorJS.navigateFileEnd(); }
 
 					app.toast.create({
 						text: 'Arquivo(s) aberto(s)',
@@ -164,9 +164,9 @@ function saveFile() {
 		$('#saveFileZIP').addClass('disabled') : $('#saveFileZIP').removeClass('disabled');
 
 	let zip = new JSZip();
-	editorHTML.getValue() != '' && (zip.file("index.html", (watermark ? HTMLWatermark : '') + editorHTML.getValue()));
-	editorCSS.getValue() != '' && (zip.file('index.css', (watermark ? CSSWatermark : '') + editorCSS.getValue()));
-	editorJS.getValue() != '' && (zip.file('index.js', (watermark ? JSWatermark : '') + editorJS.getValue()));
+	editorHTML.getValue() != '' && (zip.file("index.html", (watermark ? htmlWatermark : '') + editorHTML.getValue()));
+	editorCSS.getValue() != '' && (zip.file('index.css', (watermark ? cssWatermark : '') + editorCSS.getValue()));
+	editorJS.getValue() != '' && (zip.file('index.js', (watermark ? jsWatermark : '') + editorJS.getValue()));
 	zip.generateAsync({
 		type: "blob"
 	}).then(function (content) {
@@ -180,9 +180,9 @@ function saveFile() {
 	$('#saveFileJS').attr('download', fileTitle + '.js');
 	$('#saveFileZIP').attr('download', fileTitle + '.zip');
 
-	$('#saveFileHTML').attr('href', 'data:text/html,' + encodeURI((watermark ? HTMLWatermark : '') + editorHTML.getValue()).replace(/#/g, '%23'));
-	$('#saveFileCSS').attr('href', 'data:text/css,' + encodeURI((watermark ? CSSWatermark : '') + editorCSS.getValue()).replace(/#/g, '%23'));
-	$('#saveFileJS').attr('href', 'data:text/javascript,' + encodeURI((watermark ? JSWatermark : '') + editorJS.getValue()).replace(/#/g, '%23'));
+	$('#saveFileHTML').attr('href', 'data:text/html,' + encodeURI((watermark ? htmlWatermark : '') + editorHTML.getValue()).replace(/#/g, '%23'));
+	$('#saveFileCSS').attr('href', 'data:text/css,' + encodeURI((watermark ? cssWatermark : '') + editorCSS.getValue()).replace(/#/g, '%23'));
+	$('#saveFileJS').attr('href', 'data:text/javascript,' + encodeURI((watermark ? jsWatermark : '') + editorJS.getValue()).replace(/#/g, '%23'));
 }
 function addPackageMount() {
 	let html = '';
