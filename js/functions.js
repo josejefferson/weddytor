@@ -9,9 +9,19 @@ function copy(text) {
 function updateTitle() {
 	let regexTitle = /<title[^>]*>([^<]+)<\/title>/;
 	fileTitle = regexTitle.test(editorHTML.getValue()) ?
-		(editorHTML.getValue().match(regexTitle)[1] ? editorHTML.getValue().match(regexTitle)[1] : 'Sem título')
-		: 'Sem título';
+		(editorHTML.getValue().match(regexTitle)[1] ?
+			editorHTML.getValue().match(regexTitle)[1] : 'Sem título') : 'Sem título';
 	$('.fileTitle').text(fileTitle);
+}
+function readFile(file) {
+	return new Promise((resolve, reject) => {
+		let reader = new FileReader();
+		reader.onload = () => {
+			resolve(reader.result);
+		};
+		reader.onerror = reject;
+		reader.readAsText(file);
+	})
 }
 function saveCode() {
 	if (editorHTML.getValue() != editorHTMLValue ||
@@ -120,25 +130,28 @@ function openFile() {
 		buttons: [
 			{
 				text: 'Sim',
-				onClick: function () {
+				onClick: async function () {
 					let htmlFile = $('#openFileHTML')[0].files[0];
 					let cssFile = $('#openFileCSS')[0].files[0];
 					let jsFile = $('#openFileJS')[0].files[0];
 
-					htmlF = new FileReader();
-					cssF = new FileReader();
-					jsF = new FileReader();
-					htmlFile && htmlF.readAsText(htmlFile);
-					cssFile && cssF.readAsText(cssFile);
-					jsFile && jsF.readAsText(jsFile);
+					let html = htmlFile && await readFile(htmlFile);
+					let css = cssFile && await readFile(cssFile);
+					let js = jsFile && await readFile(jsFile);
 
 					htmlFile && editorHTML.setValue('');
 					cssFile && editorCSS.setValue('');
 					jsFile && editorJS.setValue('');
 
-					htmlF.onload = function () { editorHTML.setValue(htmlF.result.startsWith(htmlWatermark) ? htmlF.result.substring(htmlWatermark.length) : htmlF.result || ''); editorHTML.navigateFileEnd(); }
-					cssF.onload = function () { editorCSS.setValue(cssF.result.startsWith(cssWatermark) ? cssF.result.substring(cssWatermark.length) : cssF.result || ''); editorCSS.navigateFileEnd(); }
-					jsF.onload = function () { editorJS.setValue(jsF.result.startsWith(jsWatermark) ? jsF.result.substring(jsWatermark.length) : jsF.result || ''); editorJS.navigateFileEnd(); }
+					htmlFile && (editorHTML.setValue(html.startsWith(htmlWatermark) ?
+						html.substring(htmlWatermark.length) : html || ''),
+						editorHTML.navigateFileEnd());
+					cssFile && (editorCSS.setValue(css.startsWith(cssWatermark) ?
+						css.substring(cssWatermark.length) : css || ''),
+						editorCSS.navigateFileEnd());
+					jsFile && (editorJS.setValue(js.startsWith(jsWatermark) ?
+						js.substring(jsWatermark.length) : js || ''),
+						editorJS.navigateFileEnd());
 
 					app.toast.create({
 						text: 'Arquivo(s) aberto(s)',
@@ -148,6 +161,7 @@ function openFile() {
 
 					$('#openFileHTML, #openFileCSS, #openFileJS').val('');
 					updateTitle();
+					saveCode();
 					app.views.main.router.back();
 				}
 			},
@@ -180,24 +194,18 @@ function saveFile() {
 	$('#saveFileJS').attr('download', fileTitle + '.js');
 	$('#saveFileZIP').attr('download', fileTitle + '.zip');
 
-	$('#saveFileHTML').attr('href', 'data:text/html,' + encodeURI((watermark ? htmlWatermark : '') + editorHTML.getValue()).replace(/#/g, '%23'));
-	$('#saveFileCSS').attr('href', 'data:text/css,' + encodeURI((watermark ? cssWatermark : '') + editorCSS.getValue()).replace(/#/g, '%23'));
-	$('#saveFileJS').attr('href', 'data:text/javascript,' + encodeURI((watermark ? jsWatermark : '') + editorJS.getValue()).replace(/#/g, '%23'));
+	$('#saveFileHTML').attr('href', 'data:text/html,' + encodeURIComponent((watermark ? htmlWatermark : '') + editorHTML.getValue()));
+	$('#saveFileCSS').attr('href', 'data:text/css,' + encodeURIComponent((watermark ? cssWatermark : '') + editorCSS.getValue()));
+	$('#saveFileJS').attr('href', 'data:text/javascript,' + encodeURIComponent((watermark ? jsWatermark : '') + editorJS.getValue()));
 }
 function addPackageMount() {
-	let html = '';
-	html += `<div class="actions-group">`;
-	html += `	<div class="actions-button actions-close color-red">FECHAR</div>`;
-	html += `</div>`;
+	let html = addPackageCloseHTML;
 	for (let group in packages) {
 		let itemHTML = '';
 		for (let item in packages[group]) {
-			itemHTML += `<div class="actions-button actions-close" data-group="${group}" data-package="${item}">${item}</div>`;
+			itemHTML += addPackageItemHTML(group, item);
 		}
-		html += `<div class="actions-group">`;
-		html += `	<div class="actions-label">${group}</div>`;
-		html += `	${itemHTML}`;
-		html += `</div>`;
+		html += addPackageGroupHTML(group, itemHTML);
 	}
 
 	$('#addPackage').html(html);
@@ -205,7 +213,7 @@ function addPackageMount() {
 function about() {
 	app.dialog.create({
 		title: 'Sobre o Weddytor',
-		text: `Weddytor v${appVersion}<br>Copyright © Jefferson Dantas 2020`,
+		text: `Weddytor v${appVersion}<br>Desenvolvido por Jefferson Dantas`,
 		buttons: [{ text: 'OK' }]
 	}).open();
 }
