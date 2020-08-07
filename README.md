@@ -1,5 +1,5 @@
 # Weddytor
-O Weddytor é um poderoso editor de HTML online.
+Crie e edite seus códigos HTML em qualquer dispositivo com as variadas ferramentas de edição do Weddytor sem precisar baixar nada
 
 * [Clique aqui para iniciar](https://josejefferson.github.io/weddytor/#!/)
 
