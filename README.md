@@ -5,6 +5,7 @@ Desenvolva e edite seus códigos HTML no seu dispositivo móvel com o Weddytor. 
 
 ## Funcionalidades
 - Abrir e salvar códigos localmente
+- Barra de caracteres rápidos
 - Seletor de cores
 - Busca de pacotes CSS e JS
 - Editor com formatação
@@ -29,6 +30,7 @@ Desenvolva e edite seus códigos HTML no seu dispositivo móvel com o Weddytor. 
 ### Edição de HTML, CSS e JS
 
 <img src="https://github.com/josejefferson/weddytor/assets/52979246/81b4967d-2814-4b77-a808-4b6799bf591d" width="250">
+<img src="https://github.com/josejefferson/weddytor/assets/52979246/5c4c6da9-e09c-4c20-a9b3-f22c51b9cbc1" width="250">
 <img src="https://github.com/josejefferson/weddytor/assets/52979246/1c5f67ca-d8b6-45b3-8510-6095abf66eea" width="250">
 
 ### Interface
